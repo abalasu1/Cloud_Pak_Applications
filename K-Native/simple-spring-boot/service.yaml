@@ -2,7 +2,7 @@ apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
   name: helloworld-java-spring
-  namespace: default
+  namespace: knative-samples
 spec:
   template:
     spec:
