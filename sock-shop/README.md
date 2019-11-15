@@ -8,7 +8,7 @@ oc new-project sock-shop
 oc adm policy add-cluster-role-to-user cluster-admin -z default
 
 - Give openshift monitoring id access to sock-shop and other namespaces
-oc adm policy add-cluster-role-to-user cluster-admin -z system:serviceaccount:openshift-monitoring:prometheus-k8s
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:openshift-monitoring:prometheus-k8s
 
 - Socks shop pods also need to run as priviliaged containers, so grant 'privileged' Security Context Constrains (SCC)
 oc adm policy add-scc-to-user privileged -z default
