@@ -20,12 +20,12 @@ oc apply -f complete-demo.yaml
 oc apply -f servicemonitors.yaml
 
 - Load testing sock-shop
-docker run --net=host weaveworksdemos/load-test -h eu-cluster-4.fyre.ibm.com:30001 -r 100 -c 2
+docker run --net=host weaveworksdemos/load-test -h eu-cluster-1.fyre.ibm.com:30001 -r 100 -c 2
 
 - Run the load test in a loop
 while sleep 0.1; 
   do 
-    docker run --net=host weaveworksdemos/load-test -h eu-cluster-4.fyre.ibm.com:30001 -r 1000 -c 10
+    docker run --net=host weaveworksdemos/load-test -h eu-cluster-1.fyre.ibm.com:30001 -r 1000 -c 10
     echo ""; 
   done ;
 
