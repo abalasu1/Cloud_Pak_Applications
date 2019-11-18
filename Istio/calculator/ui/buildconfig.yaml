@@ -12,7 +12,7 @@ spec:
       name: ui:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/calculator/ui
+    contextDir: Istio/calculator/ui
     git:
       ref: master
       uri: <GITHUBREPO>

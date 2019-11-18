@@ -12,7 +12,7 @@ spec:
       name: add:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/calculator/basicop/add
+    contextDir: Istio/calculator/basicop/add
     git:
       ref: master
       uri: <GITHUBREPO>

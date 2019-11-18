@@ -12,7 +12,7 @@ spec:
       name: divide:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/calculator/basicop/divide
+    contextDir: Istio/calculator/basicop/divide
     git:
       ref: master
       uri: https://github.com/abalasu1/IBM-Private-Cloud.git

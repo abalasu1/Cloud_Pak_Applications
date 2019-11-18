@@ -11,7 +11,7 @@ COMPOSITEOP=$(DOCKERREPOSITORY)/$(PROJECT)/compositeop
 PROCESSOR=$(DOCKERREPOSITORY)/$(PROJECT)/processor
 UI=$(DOCKERREPOSITORY)/$(PROJECT)/ui
 
-GITHUBREPO=https://github.com/abalasu1/IBM-Private-Cloud.git
+GITHUBREPO=https://github.com/abalasu1/Cloud_Pak_Applications.git
 
 FORTIO_POD=$(shell kubectl get pod -n $(PROJECT) -l app=fortio -o jsonpath='{.items[0].metadata.name}')
 DEBUG_POD=$(shell kubectl get pod -n $(PROJECT) -l app=curl -o jsonpath='{.items[0].metadata.name}')
@@ -33,9 +33,6 @@ build-add:
 
 deploy-add:
 	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/deploymentconfig.yaml  | oc apply -f -
-
-deploy-madd:
-	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/deployment.yaml  | oc apply -f -
 
 clean-add:
 	-oc delete all -l app=add
@@ -136,6 +133,8 @@ test-processor:
 init-ui:
 	-bash -c 'oc create serviceaccount ui-sa -n $(PROJECT) --as system:admin'
 	-bash -c 'oc adm policy add-scc-to-user anyuid -z ui-sa -n $(PROJECT) --as system:admin'
+	-sed -e 's~<PROXY>~processor.$(SUBDOMAIN)~g' ./ui/src/environments/environment.ts.template > ./ui/src/environments/environment.ts
+	-sed -e 's~<PROXY>~processor.$(SUBDOMAIN)~g' ./ui/src/environments/environment.prod.ts.template > ./ui/src/environments/environment.prod.ts	
 
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./ui/service.yaml  | oc apply -f -
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~ui.$(SUBDOMAIN)~g' ./ui/route.yaml  | oc apply -f -	

@@ -12,7 +12,7 @@ spec:
       name: processor:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/calculator/processor
+    contextDir: Istio/calculator/processor
     git:
       ref: master
       uri: <GITHUBREPO>
