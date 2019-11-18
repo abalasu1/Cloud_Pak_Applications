@@ -1,0 +1,4 @@
+export const environment = {
+  production: true,
+  processorUrl: '<PROXY>/processor/calculate?verbosity=1'
+};
