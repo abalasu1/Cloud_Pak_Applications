@@ -15,7 +15,7 @@ spec:
     contextDir: Istio/calculator/basicop/multiply
     git:
       ref: master
-      uri: https://github.com/abalasu1/IBM-Private-Cloud.git
+      uri: <GITHUBREPO>
     type: Git
   strategy:
     dockerStrategy:
