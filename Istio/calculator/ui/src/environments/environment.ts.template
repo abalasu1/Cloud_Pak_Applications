@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  processorUrl: '<PROXY>/processor/calculate?verbosity=1',
+  processorUrl: 'http://<PROXY>/processor/calculate?verbosity=1',
 };
