@@ -1,7 +1,9 @@
 PROJECT=calculator-mesh
 DOCKERREPOSITORY=docker-registry.default.svc:5000
 
-PROXYNODE=158.176.134.149
+SUBDOMAIN=apps.9.30.34.153.xip.io
+
+PROXYNODE=9.30.34.153
 PROXY=$(PROXYNODE):$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
 UIPROXY=$(PROXYNODE):$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
 
@@ -13,7 +15,7 @@ COMPOSITEOP=$(DOCKERREPOSITORY)/$(PROJECT)/compositeop
 PROCESSOR=$(DOCKERREPOSITORY)/$(PROJECT)/processor
 UI=$(DOCKERREPOSITORY)/$(PROJECT)/ui
 
-GITHUBREPO=https://github.com/abalasu1/IBM-Private-Cloud.git
+GITHUBREPO=https://github.com/abalasu1/Cloud_Pak_Applications.git
 
 FORTIO_POD=$(shell kubectl get pod -n $(PROJECT) -l app=fortio -o jsonpath='{.items[0].metadata.name}')
 DEBUG_POD=$(shell kubectl get pod -n $(PROJECT) -l app=curl -o jsonpath='{.items[0].metadata.name}')
