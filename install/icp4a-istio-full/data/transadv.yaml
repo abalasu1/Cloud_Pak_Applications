@@ -1,0 +1,114 @@
+apiVersion: charts.ta.cloud.ibm.com/v1
+kind: TaRh
+metadata:
+  name: ta
+spec:
+  # Default values copied from <project_dir>/helm-charts/ta-rh/values.yaml
+
+  route:
+    hostname: "ta.apps.{{ clusterSubdomain }}" # change to place holder
+    openapiHostname: "ta.openapi.{{ clusterSubdomain }}" # change to place holder
+
+  authentication:
+    disabled:
+      liberty: false
+      ui: false
+    ocp:
+      edgeIp: "{{ cluster.authorizationEndpoint | urlsplit('hostname') }}" # change to place holder
+      endpointPort: "{{ cluster.authorizationEndpoint | urlsplit('port') }}"
+      secretName: "transformation-advisor-secret"
+    oidc:
+      endpointPort: "{{ cluster.authorizationEndpoint | urlsplit('port') }}"
+      clientId: ca5282946fac07867fbc937548cb35d3ebbace7e
+      clientSecret: 94b6cbce793d0606c0df9e8d656a159f0c06631b
+
+  # Default values for couchdb.
+  couchdb:
+    image: "ibmcom/transformation-advisor-db:2.0.1"
+    ## Configure resource requests and limits
+    ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 8Gi
+        cpu: 16000m
+    livenessProbe:
+      initialDelaySeconds: 60
+      timeoutSeconds: 3
+      periodSeconds: 5
+      failureThreshold: 6
+    readinessProbe:
+      initialDelaySeconds: 5
+      timeoutSeconds: 3
+      periodSeconds: 5
+      failureThreshold: 6
+
+    ## Enable persistence using Persistent Volume Claims
+    ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+    ##
+    persistence:
+      enabled: true # default to use PV
+      accessMode: "ReadWriteOnce"
+      size: 8Gi
+      useDynamicProvisioning: true
+
+      ## A manually managed Persistent Volume and Claim
+      ## Requires persistence.enabled: true
+      ## If defined, PVC must be created manually before volume will be bound
+      ##
+      existingClaim: ""
+
+      ##incase of minikube hostpath volume set to MANUAL
+      storageClassName: ""
+
+      supplementalGroups: []
+  # Default values for transformation advisor.
+  transadv:
+    image: "ibmcom/transformation-advisor-server:2.0.1"
+    publicUrl: "https://ta.apps.{{ clusterSubdomain }}" # change to place holder
+
+    ## Configure resource requests and limits
+    ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 4Gi
+        cpu: 16000m
+    livenessProbe:
+      initialDelaySeconds: 60
+      timeoutSeconds: 3
+      periodSeconds: 5
+      failureThreshold: 6
+    readinessProbe:
+      initialDelaySeconds: 5
+      timeoutSeconds: 3
+      periodSeconds: 5
+      failureThreshold: 6
+
+  # Default values for transformation advisor ui.
+  transadvui:
+    image: "ibmcom/transformation-advisor-ui:2.0.1"
+
+    ## Configure resource requests and limits
+    ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: 500m
+      limits:
+        memory: 4Gi
+        cpu: 16000m
+    livenessProbe:
+      initialDelaySeconds: 60
+      timeoutSeconds: 5
+      periodSeconds: 30
+      failureThreshold: 6
+    readinessProbe:
+      initialDelaySeconds: 5
+      timeoutSeconds: 5
+      periodSeconds: 30
+      failureThreshold: 6

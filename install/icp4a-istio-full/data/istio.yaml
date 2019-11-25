@@ -1,0 +1,74 @@
+#
+# Minimal Istio configuration for Knative.
+# Based on https://github.com/knative/docs/blob/release-0.6/docs/install/installing-istio.md#installing-istio-without-sidecar-injection
+# Complete Istio configuration available at https://github.com/istio/istio/tree/1.1.7/install/kubernetes/helm/istio.
+#
+
+#
+# Gateways Configuration, refer to the charts/gateways/values.yaml
+# for detailed configuration
+#
+gateways:
+  enabled: true
+  istio-ingressgateway:
+    autoscaleMin: 1
+    autoscaleMax: 1
+
+#
+# sidecar-injector webhook configuration, refer to the
+# charts/sidecarInjectorWebhook/values.yaml for detailed configuration
+#
+sidecarInjectorWebhook:
+  enabled: false
+
+#
+# galley configuration, refer to charts/galley/values.yaml
+# for detailed configuration
+#
+galley:
+  enabled: false
+
+#
+# mixer configuration
+#
+# @see charts/mixer/values.yaml, it takes precedence
+mixer:
+  enabled: false
+  policy:
+    # if policy is enabled the global.disablePolicyChecks has affect.
+    enabled: false
+
+  telemetry:
+    enabled: false
+#
+# pilot configuration
+#
+# @see charts/pilot/values.yaml
+pilot:
+  sidecar: false
+  traceSampling: 100
+
+#
+# security configuration
+#
+security:
+  enabled: false
+
+#
+# addon prometheus configuration
+#
+prometheus:
+  enabled: false
+
+# Common settings used among istio subcharts.
+global:
+  omitSidecarInjectorConfigMap: true
+  disablePolicyChecks: true
+
+  proxy:
+    # This controls the 'policy' in the sidecar injector.
+    autoInject: disabled
+
+  # Use the Mesh Control Protocol (MCP) for configuring Mixer and
+  # Pilot. Requires galley (`--set galley.enabled=true`).
+  useMCP: false
