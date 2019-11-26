@@ -20,3 +20,8 @@ when knative/istio which are part of cp4a are installed.
 - export ENTITLED_REGISTRY_KEY=xxx
 
 docker login "$ENTITLED_REGISTRY" -u "$ENTITLED_REGISTRY_USER" -p "$ENTITLED_REGISTRY_KEY"
+
+### Set up CP4A on an openshift cluster with multitenant ovs network plugin with network isolation enabled
+- How to check if network isolation is enabled: kubectl get netnamespaces (if no resources are found, network isolation is
+not enabled)
+- oc adm pod-network make-projects-global kube-system istio-system knative-eventing knative-serving knative-sources kappnav
