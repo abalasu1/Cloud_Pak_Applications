@@ -1,0 +1,23 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: ui
+  namespace: <PROJECT>
+  labels:
+    app: ui
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+      - image: <CONTAINER>
+        name: ui-container
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP        
