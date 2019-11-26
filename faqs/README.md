@@ -15,8 +15,8 @@ when knative/istio which are part of cp4a are installed.
 - Execute script to delete the project (./delete-crd.sh <project-name>)
 
 ### Set up access to ibm registry for installing CP4A using an entitlement key
-export ENTITLED_REGISTRY=cp.icr.io
-export ENTITLED_REGISTRY_USER=ekey
-export ENTITLED_REGISTRY_KEY=xxx
+- export ENTITLED_REGISTRY=cp.icr.io
+- export ENTITLED_REGISTRY_USER=ekey
+- export ENTITLED_REGISTRY_KEY=xxx
 
 docker login "$ENTITLED_REGISTRY" -u "$ENTITLED_REGISTRY_USER" -p "$ENTITLED_REGISTRY_KEY"
