@@ -11,7 +11,7 @@ spec:
     matchLabels:
       app: curl    
   template:
-    metadata:
+    metadata:  
       labels:
         app: curl         
     spec:

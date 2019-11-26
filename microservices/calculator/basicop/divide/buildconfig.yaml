@@ -12,7 +12,7 @@ spec:
       name: divide:latest
   runPolicy: Serial
   source:
-    contextDir: Istio/calculator/basicop/divide
+    contextDir: microservices/calculator/basicop/divide
     git:
       ref: master
       uri: <GITHUBREPO>

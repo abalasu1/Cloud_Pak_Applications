@@ -52,6 +52,6 @@ spec:
       from:
         kind: ImageStreamTag
         name: compositeop:latest
-        namespace: calculator
+        namespace: <PROJECT>
     type: ImageChange
   - type: ConfigChange

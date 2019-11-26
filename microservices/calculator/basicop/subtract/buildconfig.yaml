@@ -12,7 +12,7 @@ spec:
       name: subtract:latest
   runPolicy: Serial
   source:
-    contextDir: Istio/calculator/basicop/subtract
+    contextDir: microservices/calculator/basicop/subtract
     git:
       ref: master
       uri: <GITHUBREPO>

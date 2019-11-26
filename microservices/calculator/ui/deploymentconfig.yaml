@@ -41,6 +41,6 @@ spec:
       from:
         kind: ImageStreamTag
         name: ui:latest
-        namespace: calculator
+        namespace: <PROJECT>
     type: ImageChange
   - type: ConfigChange

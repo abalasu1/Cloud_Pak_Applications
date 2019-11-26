@@ -12,7 +12,7 @@ spec:
       name: compositeop:latest
   runPolicy: Serial
   source:
-    contextDir: Istio/calculator/compositeop
+    contextDir: microservices/calculator/compositeop
     git:
       ref: master
       uri: <GITHUBREPO>

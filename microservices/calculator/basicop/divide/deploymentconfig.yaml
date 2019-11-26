@@ -40,6 +40,6 @@ spec:
       from:
         kind: ImageStreamTag
         name: divide:latest
-        namespace: calculator
+        namespace: <PROJECT>
     type: ImageChange
   - type: ConfigChange
