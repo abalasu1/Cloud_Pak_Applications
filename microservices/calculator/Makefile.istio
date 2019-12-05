@@ -43,7 +43,8 @@ clean:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc delete -f -
 
 	-bash -c 'oc delete project $(BUILDNS)'
-	-bash -c 'oc delete project $(PROJECT)'	
+	-bash -c 'oc delete project $(PROJECT)'
+        -bash -c 'oc delete project $(UINS)'
 	
 init-add:
 	-bash -c 'oc project $(PROJECT)'
