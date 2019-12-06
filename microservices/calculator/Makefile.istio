@@ -34,7 +34,9 @@ init:
 
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/gateway.yaml  | oc apply -f -
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/destinationrules.yaml  | oc apply -f -	
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc apply -f -		
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc apply -f -
+
+	-bash -c 'oc adm pod-network join-projects --to=istio-system $(PROJECT)'
 
 clean:
 	-bash -c 'oc project $(PROJECT)'
