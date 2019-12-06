@@ -3,7 +3,7 @@
 cluster:
   router:
     # Leave empty to use the default subdomain.
-    subdomain: ""
+    subdomain: "apps.9.30.34.153.xip.io"
 
 # Kabanero Enterprise settings
 kabanero:

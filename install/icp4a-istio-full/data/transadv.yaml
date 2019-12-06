@@ -61,7 +61,7 @@ spec:
       existingClaim: ""
 
       ##incase of minikube hostpath volume set to MANUAL
-      storageClassName: ""
+      storageClassName: "glusterfs-storage"
 
       supplementalGroups: []
   # Default values for transformation advisor.

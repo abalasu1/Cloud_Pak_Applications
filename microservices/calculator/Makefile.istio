@@ -44,7 +44,7 @@ clean:
 
 	-bash -c 'oc delete project $(BUILDNS)'
 	-bash -c 'oc delete project $(PROJECT)'
-        -bash -c 'oc delete project $(UINS)'
+	-bash -c 'oc delete project $(UINS)'
 	
 init-add:
 	-bash -c 'oc project $(PROJECT)'

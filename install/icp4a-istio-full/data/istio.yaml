@@ -101,7 +101,7 @@ istio_cni:
 # addon Istio CoreDNS configuration
 #
 istiocoredns:
-  enabled: false
+  enabled: true
 
 # Common settings used among istio subcharts.
 global:
@@ -176,7 +176,7 @@ global:
     dnsRefreshRate: 5s
 
     #If set to true, istio-proxy container will have privileged securityContext
-    privileged: false
+    privileged: true
 
     # If set, newly injected sidecars will have core dumps enabled.
     enableCoreDump: false
