@@ -45,3 +45,4 @@ spec:
     - destination:
         host: compositeop
         subset: v1
+

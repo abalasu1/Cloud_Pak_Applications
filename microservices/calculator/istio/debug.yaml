@@ -12,6 +12,8 @@ spec:
       app: curl    
   template:
     metadata:  
+      annotations:
+        sidecar.istio.io/inject: "true"
       labels:
         app: curl         
     spec:
