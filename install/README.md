@@ -15,3 +15,8 @@ Standard configuration files with full istio
 Post-Install:
 - oc adm policy add-cluster-role-to-user cluster-admin -z istiocoredns-service-account -n istio-system
 - oc adm pod-network make-projects-global kappnav istio-system kube-system
+
+## As of version 4.0.0.0
+
+### istio-full:
+Standard configuration files with full istio 
