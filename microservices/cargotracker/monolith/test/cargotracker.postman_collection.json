@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "616d7a00-4171-4ea1-ac13-813f1cc66016",
+		"name": "cargotracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargobooking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingAmount\": 100,\n    \"originLocation\": \"CNHKG\",\n    \"destLocation\" : \"USNYC\",\n    \"destArrivalDeadline\" : \"2020-01-28\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargobooking",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargobooking"
+					]
+				},
+				"description": "Initial Booking"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargorouting",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"bookingId\": \"ED36F6CA\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargorouting",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargorouting"
+					]
+				},
+				"description": "Routing"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"CNHKG\",\n    \"handlingType\" : \"RECEIVE\",\n    \"completionTime\": \"2020-01-11\",\n    \"voyageNumber\" : \"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "Receive"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"CNHKG\",\n    \"handlingType\" : \"LOAD\",\n    \"completionTime\": \"2019-01-11\",\n    \"voyageNumber\" : \"0100S\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "1st Load"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"CNHGH\",\n    \"handlingType\" : \"LOAD\",\n    \"completionTime\": \"2020-01-12\",\n    \"voyageNumber\" : \"0101S\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "1st Unload"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"CNHGH\",\n    \"handlingType\" : \"LOAD\",\n    \"completionTime\": \"2020-01-12\",\n    \"voyageNumber\" : \"0101S\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "2nd Load"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"JNTKO\",\n    \"handlingType\" : \"UNLOAD\",\n    \"completionTime\": \"2020-01-13\",\n    \"voyageNumber\" : \"0101S\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "2nd UnLoad"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"JNTKO\",\n    \"handlingType\" : \"LOAD\",\n    \"completionTime\": \"2020-01-13\",\n    \"voyageNumber\" : \"0102S\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "3rd Load"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"USNYC\",\n    \"handlingType\" : \"CUSTOMS\",\n    \"completionTime\": \"2020-01-15\",\n    \"voyageNumber\" : \"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "customs"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bookingId\" : \"ED36F6CA\",\n    \"unLocode\" : \"USNYC\",\n    \"handlingType\" : \"CLAIM\",\n    \"completionTime\": \"2020-01-16\",\n    \"voyageNumber\" : \"\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9080/cargotracker/serviceapi/cargohandling",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9080",
+					"path": [
+						"cargotracker",
+						"serviceapi",
+						"cargohandling"
+					]
+				},
+				"description": "claim"
+			},
+			"response": []
+		}
+	]
+}
