@@ -1,0 +1,23 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: cargotracker
+  name: cargotracker
+  namespace: cargotracker-monolith
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: cargotracker:latest
+  runPolicy: Serial
+  source:
+    contextDir: cargotracker/monolith
+    git:
+      ref: master
+      uri: <GITHUBREPO>
+    type: Git
+  strategy:
+    dockerStrategy:
+      dockerfilePath: ./Dockerfile
+    type: Source
