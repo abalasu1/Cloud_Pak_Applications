@@ -4,7 +4,7 @@ metadata:
   labels:
     app: cargotracker
   name: cargotracker
-  namespace: cargotracker-monolith
+  namespace: <PROJECT>
 spec:
   output:
     to:
@@ -12,7 +12,7 @@ spec:
       name: cargotracker:latest
   runPolicy: Serial
   source:
-    contextDir: cargotracker/monolith
+    contextDir: microservices/cargotracker/monolith
     git:
       ref: master
       uri: <GITHUBREPO>
