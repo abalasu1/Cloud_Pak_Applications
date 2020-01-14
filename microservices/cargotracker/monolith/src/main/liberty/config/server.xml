@@ -18,6 +18,6 @@
                     user="cargotracker" password="cargotracker" serverTimezone="EST"/>
     </dataSource>
     <library id="MySQLLib">
-        <file name="/Users/admin/Documents/ISL/Code/Bluemix/microservices/Cargotracker/monolith/mysqllib/mysql-connector-java-8.0.17.jar"/>
+        <file name="${env.MYSQL_LIB}/mysqllib/mysql-connector-java-8.0.17.jar"/>
     </library>
 </server>
