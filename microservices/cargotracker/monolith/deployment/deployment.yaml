@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cargotracker
+  namespace: <PROJECT>
+  labels:
+    app: cargotracker
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cargotracker
+    spec:
+      containers:
+      - name: cargotracker
+        image: arunimi/cargotracker
