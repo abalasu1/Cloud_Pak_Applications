@@ -13,7 +13,7 @@
     <dataSource id="cargotracker" jndiName="jdbc/cargotracker">
         <jdbcDriver libraryRef="MySQLLib"/>
         <properties databaseName="cargotracker"
-                    serverName="9.30.204.134" portNumber="3306"
+                    serverName="mysql" portNumber="3306"
                     user="cargotracker" password="cargotracker" serverTimezone="EST"/>
     </dataSource>
     <library id="MySQLLib">
