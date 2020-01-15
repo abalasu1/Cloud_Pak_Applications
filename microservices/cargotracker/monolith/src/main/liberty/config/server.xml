@@ -3,8 +3,7 @@
         <feature>webprofile-8.0</feature>
     </featureManager>
 
-    <httpEndpoint httpPort="${default.http.port}" 
-    httpsPort="${default.https.port}" id="defaultHttpEndpoint"  host="*" />
+    <httpEndpoint httpPort="9080" httpsPort="9443" id="defaultHttpEndpoint"  host="*" />
 
     <webApplication
             id="cargotracker" location="cargotracker.war"
@@ -14,10 +13,10 @@
     <dataSource id="cargotracker" jndiName="jdbc/cargotracker">
         <jdbcDriver libraryRef="MySQLLib"/>
         <properties databaseName="cargotracker"
-                    serverName="mysql" portNumber="3306"
+                    serverName="9.30.204.134" portNumber="3306"
                     user="cargotracker" password="cargotracker" serverTimezone="EST"/>
     </dataSource>
     <library id="MySQLLib">
-        <file name="${env.MYSQL_LIB}/mysqllib/mysql-connector-java-8.0.17.jar"/>
+        <file name="${server.config.dir}/lib/mysql-connector-java-8.0.17.jar"/>
     </library>
 </server>

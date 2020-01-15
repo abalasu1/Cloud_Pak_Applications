@@ -1,7 +1,43 @@
-FROM websphere-liberty:webProfile7
+FROM adoptopenjdk/openjdk8-openj9 AS build-stage
+
+RUN apt-get update && \
+    apt-get install -y maven unzip
+
+COPY . /project
+WORKDIR /project
+
+#RUN mvn -X initialize process-resources verify => to get dependencies from maven
+#RUN mvn clean package	
+#RUN mvn --version
+RUN mvn --version
+
+RUN mkdir -p /config/apps && \
+    mkdir -p /config/lib && \
+    cp ./src/main/liberty/config/server.xml /config && \
+    cp ./target/cargotracker-1.0.war /config/apps/cargotracker.war && \
+    if [ ! -z "$(ls ./src/main/liberty/lib)" ]; then \
+        cp ./src/main/liberty/lib/mysql-connector-java-8.0.17.jar /config/lib/mysql-connector-java-8.0.17.jar; \
+    fi
+
+FROM ibmcom/websphere-liberty:webProfile7-ubi-min-amd64
+
+ARG SSL=true
+
+ARG MP_MONITORING=true
+ARG HTTP_ENDPOINT=false
+
 RUN mkdir -p /opt/ibm/wlp/usr/shared/config/lib/global
-COPY mysqllib/mysql-connector-java-8.0.17.jar /opt/ibm/wlp/usr/shared/config/lib/global/mysqllib/mysql-connector-java-8.0.17.jar
-ENV MYSQL_LIB /opt/ibm/wlp/usr/shared/config/lib/global/mysqllib
-ADD target/cargotracker-1.0.war /config/dropins/
-EXPOSE 9080
-ENV LICENSE accept
+COPY --chown=1001:0 --from=build-stage /config/ /config/
+
+USER root
+RUN configure.sh
+USER 1001
+
+# Upgrade to production license if URL to JAR provided
+ARG LICENSE_JAR_URL
+RUN \
+   if [ $LICENSE_JAR_URL ]; then \
+     wget $LICENSE_JAR_URL -O /tmp/license.jar \
+     && java -jar /tmp/license.jar -acceptLicense /opt/ibm \
+     && rm /tmp/license.jar; \
+   fi
