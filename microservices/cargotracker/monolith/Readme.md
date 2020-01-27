@@ -1,4 +1,5 @@
 # Jakarta EE 8 Implementation utilizing Open Liberty
+# Credits: Based on code provided as part of Practical Domain Driven design book. 
 
 This Chapter contains a complete DDD implementation of the Cargo Tracker application based on the Jakarta EE Platform utilizing 
 the OpenLiberty (v19.0.0.9) implementation
