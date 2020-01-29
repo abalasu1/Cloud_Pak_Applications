@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: booking
+  namespace: cargotracker
+  labels:
+    app: booking
+spec:
+  replicas: 1
+  strategy: 
+    type: Recreate  
+  template:
+    metadata:
+      labels:
+        app: booking
+    spec:
+      containers:
+      - image: arunimi/booking:1.0.0
+        name: booking
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8001
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "ocp"
+        readinessProbe:
+          httpGet:
+            path: /actuator
+            port: 8001
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8001
+          initialDelaySeconds: 60
+          timeoutSeconds: 10          
+        resources:         
+          requests:
+            cpu: 20m
+            memory: 50Mi      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking
+  namespace: cargotracker
+  labels:
+    app: booking
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8001"
+    port: 8001
+    targetPort: 8001
+  selector:
+    app: booking
