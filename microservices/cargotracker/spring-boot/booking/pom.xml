@@ -158,7 +158,6 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
