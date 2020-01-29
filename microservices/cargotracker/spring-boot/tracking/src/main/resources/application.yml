@@ -1,4 +1,42 @@
 spring:
+  profiles: ocp
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: cargoRoutings
+          group: cargoRoutingsQueue
+          contentType: 'application/json'                           
+                    
+  datasource:
+    url: "jdbc:mysql://mysql:3306/trackingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: trackingmsdb
+    password: trackingmsdb
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: tracking        
+
+server:
+  port: 8002
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: dev
+---
+spring:
+  profiles:
+    active: local
   cloud:
     stream:
       bindings:
@@ -31,4 +69,4 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-      environment: dev
+      environment: dev      
