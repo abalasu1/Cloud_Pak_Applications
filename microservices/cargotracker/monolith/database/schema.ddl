@@ -73,10 +73,17 @@ CREATE TABLE `carrier_movement` (
 insert VOYAGE (Id,voyage_number) values(3,'0100S');
 insert VOYAGE (Id,voyage_number) values(4,'0101S');
 insert VOYAGE (Id,voyage_number) values(5,'0102S');
+INSERT INTO `cargotracker`.`VOYAGE` (`Id`, `voyage_number`) VALUES ('6', '0103S');
+INSERT INTO `cargotracker`.`VOYAGE` (`Id`, `voyage_number`) VALUES ('7', '0104S');
+INSERT INTO `cargotracker`.`VOYAGE` (`Id`, `voyage_number`) VALUES ('8', '0105S');
 
 insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1355,'CNHGH','CNHKG',3,'2019-08-28','2019-08-25');
 insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1356,'JNTKO','CNHGH',4,'2019-09-10','2019-09-01');
 insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1357,'USNYC','JNTKO',5,'2019-09-25','2019-09-15');  
+
+INSERT INTO `cargotracker`.`carrier_movement` (`Id`, `arrival_location_id`, `departure_location_id`, `voyage_id`, `arrival_date`, `departure_date`) VALUES ('1358', 'USNYC', 'JNTKO', '6', '2020-01-15', '2020-01-18');
+INSERT INTO `cargotracker`.`carrier_movement` (`Id`, `arrival_location_id`, `departure_location_id`, `voyage_id`, `arrival_date`, `departure_date`) VALUES ('1359', 'JNTKO', 'CNHGH', '7', '2020-01-19', '2020-01-22');
+INSERT INTO `cargotracker`.`carrier_movement` (`Id`, `arrival_location_id`, `departure_location_id`, `voyage_id`, `arrival_date`, `departure_date`) VALUES ('1360', 'CNHGH', 'CNHKG', '8', '2020-01-23', '2020-01-25');
 
 ##Tracking_activity DDL
  CREATE TABLE `tracking_activity` (
