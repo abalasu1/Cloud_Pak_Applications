@@ -1,4 +1,48 @@
 spring:
+  profiles:
+    active: local
+  cloud:
+    stream:
+      bindings:     
+        cargoBookingChannel:
+          destination: cargoBookings
+          group: cargoBookingsQueue
+        cargoRoutingChannel:
+          destination: cargoRoutings 
+          group: cargoRoutingsQueue
+        input:
+          destination: cargoHandlings  
+          group: cargoHandlingsQueue   
+          contentType: 'application/json'                                      
+  datasource:
+    url: "jdbc:mysql://mysql:3306/bookingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: bookingmsdb
+    password: bookingmsdb
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+  application:
+    name: booking        
+
+server:
+  port: 8001
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: dev
+---
+spring:
+  profiles:
+    active: local
   cloud:
     stream:
       bindings:     
@@ -36,4 +80,4 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-      environment: dev     
+      environment: dev      
