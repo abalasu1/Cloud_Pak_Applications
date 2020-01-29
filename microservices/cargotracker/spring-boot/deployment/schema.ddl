@@ -5,7 +5,7 @@ CREATE USER 'bookingmsdb'@'%' IDENTIFIED BY 'bookingmsdb';
 GRANT ALL PRIVILEGES ON bookingmsdb.* TO 'bookingmsdb'@'%';
 
 ##Cargo Table DDL
-CREATE TABLE `CARGO` (
+CREATE TABLE `cargo` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `BOOKING_ID` varchar(20) NOT NULL,
   `TRANSPORT_STATUS` varchar(100) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `CARGO` (
 
 
 ##Leg Table DDL
-	CREATE TABLE `LEG` (
+	CREATE TABLE `leg` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
   `LOAD_TIME` timestamp NULL DEFAULT NULL,
   `UNLOAD_TIME` timestamp NULL DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE USER 'routingmsdb'@'%' IDENTIFIED BY 'routingmsdb';
 GRANT ALL PRIVILEGES ON routingmsdb.* TO 'routingmsdb'@'%';
 
 ##Voyage Table DDL
-CREATE TABLE `VOYAGE` (
+CREATE TABLE `voyage` (
 `Id` int(11) NOT NULL AUTO_INCREMENT,
 `voyage_number` varchar(20) NOT NULL,
 PRIMARY KEY (`Id`)
@@ -91,13 +91,13 @@ CREATE TABLE `carrier_movement` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1358 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 ### Data to ensure Routing works fine ->
-insert VOYAGE (Id,voyage_number) values(3,'0100S');
-insert VOYAGE (Id,voyage_number) values(4,'0101S');
-insert VOYAGE (Id,voyage_number) values(5,'0102S');
+insert voyage (Id,voyage_number) values(3,'0100S');
+insert voyage (Id,voyage_number) values(4,'0101S');
+insert voyage (Id,voyage_number) values(5,'0102S');
 
-INSERT INTO `VOYAGE` (`Id`, `voyage_number`) VALUES ('6', '0103S');
-INSERT INTO `VOYAGE` (`Id`, `voyage_number`) VALUES ('7', '0104S');
-INSERT INTO `VOYAGE` (`Id`, `voyage_number`) VALUES ('8', '0105S');
+INSERT INTO `voyage` (`Id`, `voyage_number`) VALUES ('6', '0103S');
+INSERT INTO `voyage` (`Id`, `voyage_number`) VALUES ('7', '0104S');
+INSERT INTO `voyage` (`Id`, `voyage_number`) VALUES ('8', '0105S');
 
 insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1355,'CNHGH','CNHKG',3,'2019-08-28','2019-08-25');
 insert into carrier_movement (Id,arrival_location_id,departure_location_id,voyage_id,arrival_date,departure_date) 		values (1356,'JNTKO','CNHGH',4,'2019-09-10','2019-09-01');
