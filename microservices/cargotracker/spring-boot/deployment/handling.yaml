@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: handling
+  namespace: cargotracker
+  labels:
+    app: handling
+spec:
+  replicas: 1
+  strategy: 
+    type: Recreate  
+  template:
+    metadata:
+      labels:
+        app: handling
+    spec:
+      containers:
+      - image: arunimi/handling:1.0.0
+        name: handling
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8004
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "ocp"
+        readinessProbe:
+          httpGet:
+            path: /actuator
+            port: 8004
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8004
+          initialDelaySeconds: 60
+          timeoutSeconds: 10          
+        resources:         
+          requests:
+            cpu: 20m
+            memory: 50Mi      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: handling
+  namespace: cargotracker
+  labels:
+    app: handling
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8004"
+    port: 8004
+    targetPort: 8004
+  selector:
+    app: handling

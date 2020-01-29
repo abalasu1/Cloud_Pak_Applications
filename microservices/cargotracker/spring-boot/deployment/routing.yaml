@@ -1,0 +1,57 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: routing
+  namespace: cargotracker
+  labels:
+    app: routing
+spec:
+  replicas: 1
+  strategy: 
+    type: Recreate  
+  template:
+    metadata:
+      labels:
+        app: routing
+    spec:
+      containers:
+      - image: arunimi/routing:1.0.0
+        name: routing
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8003
+        env:
+        - name: SPRING_PROFILES_ACTIVE
+          value: "ocp"
+        readinessProbe:
+          httpGet:
+            path: /actuator
+            port: 8003
+          initialDelaySeconds: 10
+          timeoutSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8003
+          initialDelaySeconds: 60
+          timeoutSeconds: 10          
+        resources:         
+          requests:
+            cpu: 20m
+            memory: 50Mi      
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: routing
+  namespace: cargotracker
+  labels:
+    app: routing
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "8003"
+    port: 8003
+    targetPort: 8003
+  selector:
+    app: routing
