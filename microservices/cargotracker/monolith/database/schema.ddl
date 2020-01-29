@@ -1,4 +1,10 @@
 Database Name -> cargotracker (user: cargotracker / pw: cargotracker)
+CREATE SCHEMA `cargotracker` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+use cargotracker;
+
+CREATE USER 'cargotracker'@'%' IDENTIFIED BY 'cargotracker';
+GRANT ALL PRIVILEGES ON cargotracker.* TO 'cargotracker'@'%';
+
 Tables ->
 
 ##Cargo Table DDL
