@@ -23,7 +23,6 @@ public class CargoRoutedEventHandler {
     public void receiveEvent(CargoRoutedEvent cargoRoutedEvent) {
         //Process the Event
     	System.out.println("Cargo Routed Event" + cargoRoutedEvent.getCargoRoutedEventData().getBookingId());
-        assignTrackingIdCommandService.assignTrackingNumberToCargo(TrackingDetailsCommandEventAssembler.toCommandFromEvent(cargoRoutedEvent));
-    	
+        assignTrackingIdCommandService.assignTrackingNumberToCargo(TrackingDetailsCommandEventAssembler.toCommandFromEvent(cargoRoutedEvent));        
     }
 }

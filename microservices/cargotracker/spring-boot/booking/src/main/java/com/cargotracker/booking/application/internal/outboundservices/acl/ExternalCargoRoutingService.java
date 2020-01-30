@@ -32,7 +32,7 @@ public class ExternalCargoRoutingService {
         params.put("destination",routeSpecification.getDestination().getUnLocCode());
         params.put("arrivalDeadline",routeSpecification.getArrivalDeadline().toString());
 
-        TransitPath transitPath = restTemplate.getForObject("http://routing:8003/cargorouting/optimalRoute?origin=&destination=&deadline=",
+        TransitPath transitPath = restTemplate.getForObject("http://localhost:8003/cargorouting/optimalRoute?origin=&destination=&deadline=",
                     TransitPath.class,params);
 
 
