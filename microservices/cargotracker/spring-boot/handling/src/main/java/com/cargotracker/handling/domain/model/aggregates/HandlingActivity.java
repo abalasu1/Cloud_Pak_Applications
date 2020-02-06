@@ -89,7 +89,7 @@ public class HandlingActivity extends AbstractAggregateRoot<HandlingActivity> {
 
 
         //Add this domain event which needs to be fired when the new cargo is saved
-        addDomainEvent(cargoHandledEvent);        
+        addDomainEvent(cargoHandledEvent); 
     }
 
     /**
@@ -101,7 +101,7 @@ public class HandlingActivity extends AbstractAggregateRoot<HandlingActivity> {
      */
     public HandlingActivity(CargoBookingId cargoBookingId, Date completionTime,
                           Type type, Location location) {
-        System.out.println("***Type is**"+type);
+        //System.out.println("***Type is**"+type);
         if (type.requiresVoyage()) {
             throw new IllegalArgumentException(
                     "VoyageNumber is required for event type " + type);
@@ -153,7 +153,7 @@ public class HandlingActivity extends AbstractAggregateRoot<HandlingActivity> {
      * @param event
      */
     public void addDomainEvent(Object event){
-    	System.out.println("Event Trigerred");
+    	//System.out.println("Event Trigerred");
         registerEvent(event);
     }
 }

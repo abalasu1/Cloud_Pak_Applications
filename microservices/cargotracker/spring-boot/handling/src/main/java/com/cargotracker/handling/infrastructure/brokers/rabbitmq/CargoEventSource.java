@@ -7,6 +7,9 @@ import org.springframework.messaging.MessageChannel;
  * Interface depicting all output channels
  */
 public interface CargoEventSource {
-    @Output("cargoHandlingChannel")
-    MessageChannel cargoHandling();
+    @Output("cargoHandlingChannel1")
+    MessageChannel cargoHandling1();
+    
+    @Output("cargoHandlingChannel2")
+    MessageChannel cargoHandling2();
 }

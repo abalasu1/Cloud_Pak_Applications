@@ -1,6 +1,8 @@
 package com.cargotracker.booking.domain.model.valueobjects;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
 import javax.persistence.Transient;
 
 
@@ -8,7 +10,7 @@ import javax.persistence.Transient;
 public class LastCargoHandledEvent {
     private Integer handlingEventId;
     
-    @Transient
+    @Column(name = "last_handling_event_type")
     private String handlingEventType;
     
     @Transient

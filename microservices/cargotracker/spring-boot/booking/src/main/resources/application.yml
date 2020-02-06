@@ -9,9 +9,9 @@ spring:
         cargoRoutingChannel:
           destination: cargoRoutings 
           group: cargoRoutingsQueue
-        input:
-          destination: cargoHandlings  
-          group: cargoHandlingsQueue   
+        cargoHandlingChannel2:
+          destination: cargoHandlings2
+          group: cargoHandlingsQueue2   
           contentType: 'application/json'                                      
   datasource:
     url: "jdbc:mysql://mysql:3306/bookingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"

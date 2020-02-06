@@ -3,9 +3,12 @@ spring:
   cloud:
     stream:
       bindings:     
-        cargoHandlingChannel:
-          destination: cargoHandlings
-          group: cargoHandlingsQueue
+        cargoHandlingChannel1:
+          destination: cargoHandlings1
+          group: cargoHandlingsQueue1
+        cargoHandlingChannel2:
+          destination: cargoHandlings2
+          group: cargoHandlingsQueue2         
   datasource:
     url: "jdbc:mysql://mysql:3306/handlingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
     username: handlingmsdb

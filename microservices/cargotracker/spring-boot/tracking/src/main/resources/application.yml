@@ -2,11 +2,15 @@ spring:
   profiles: ocp
   cloud:
     stream:
-      bindings:
-        input:
+      bindings:      
+        cargoRoutingChannel:
           destination: cargoRoutings
           group: cargoRoutingsQueue
-          contentType: 'application/json'                           
+          contentType: 'application/json'
+        cargoHandlingChannel1:
+          destination: cargoHandlings1
+          group: cargoHandlingsQueue1
+          contentType: 'application/json'                                                   
                     
   datasource:
     url: "jdbc:mysql://mysql:3306/trackingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
@@ -37,13 +41,24 @@ management:
 spring:
   profiles:
     active: local
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        use_sql_comments: false
+        format_sql: false
+        type: trace  
   cloud:
     stream:
       bindings:
-        input:
+        cargoRoutingChannel:
           destination: cargoRoutings
           group: cargoRoutingsQueue
-          contentType: 'application/json'                           
+          contentType: 'application/json'
+        cargoHandlingChannel:
+          destination: cargoHandlings
+          group: cargoHandlingsQueue
+          contentType: 'application/json'                          
                     
   datasource:
     url: "jdbc:mysql://localhost:3306/trackingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
@@ -70,3 +85,7 @@ management:
     tags:
       application: ${spring.application.name}
       environment: dev      
+      
+logging:
+  level:
+    org.hibernate: fatal      

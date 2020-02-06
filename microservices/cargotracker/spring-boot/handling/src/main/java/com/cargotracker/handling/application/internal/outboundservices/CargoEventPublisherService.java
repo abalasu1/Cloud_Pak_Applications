@@ -22,6 +22,7 @@ public class CargoEventPublisherService {
 
     @TransactionalEventListener
     public void handleCargoHandledEvent(CargoHandledEvent cargoHandledEvent){
-        cargoEventSource.cargoHandling().send(MessageBuilder.withPayload(cargoHandledEvent).build());
+        cargoEventSource.cargoHandling1().send(MessageBuilder.withPayload(cargoHandledEvent).build());
+        cargoEventSource.cargoHandling2().send(MessageBuilder.withPayload(cargoHandledEvent).build());
     }
 }

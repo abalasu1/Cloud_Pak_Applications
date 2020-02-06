@@ -31,8 +31,8 @@ public class CargoHandlingController {
     @PostMapping
     @ResponseBody
     public String registerHandlingActivity(@RequestBody HandlingActivityRegistrationResource handlingActivityRegistrationResource){
-        System.out.println("***"+handlingActivityRegistrationResource.getBookingId());
-        System.out.println("***"+handlingActivityRegistrationResource.getHandlingType());
+        /*System.out.println("***"+handlingActivityRegistrationResource.getBookingId());
+        System.out.println("***"+handlingActivityRegistrationResource.getHandlingType());*/
 
         handlingActivityRegistrationCommandService.registerHandlingActivityService(HandlingActivityRegistrationCommandDTOAssembler.toCommandFromDTO(handlingActivityRegistrationResource));
         return "Handling Activity Registered";

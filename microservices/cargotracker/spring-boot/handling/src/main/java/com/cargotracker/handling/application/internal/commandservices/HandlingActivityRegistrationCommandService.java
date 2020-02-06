@@ -22,7 +22,7 @@ public class HandlingActivityRegistrationCommandService {
      * @return BookingId of the CargoBookingId
      */
     public void registerHandlingActivityService(HandlingActivityRegistrationCommand handlingActivityRegistrationCommand){
-    	System.out.println("Handling Voyage Number is"+handlingActivityRegistrationCommand.getVoyageNumber());
+    	//System.out.println("Handling Voyage Number is"+handlingActivityRegistrationCommand.getVoyageNumber());
         if(!handlingActivityRegistrationCommand.getVoyageNumber().equals("")) {
         	HandlingActivity handlingActivity = new HandlingActivity(
         			new CargoBookingId(handlingActivityRegistrationCommand.getBookingId()),

@@ -149,44 +149,60 @@ public class Delivery {
     	System.out.println("Route Specification 11=" + routeSpecification.toString());    	
     	System.out.println("LEGS : " + itinerary.toString());*/
     	
-    	if (this.routingStatus == RoutingStatus.ROUTED && itinerary != null && currentVoyage != null) {
+    	CargoHandlingActivity nextExpectedActivity = NO_ACTIVITY;
+    	if (lastEvent == null) {
+    		// First handling Event
     		List<Leg> legs = itinerary.getLegs();
     		if (legs.isEmpty()) return NO_ACTIVITY;
-    			
+    		
+    		ListIterator<Leg> iterator = legs.listIterator();
+    		
+    		Leg nextLeg=null;
+    		if (iterator.hasNext()) nextLeg = iterator.next();
+    		 		
+    		nextExpectedActivity.setType("RECEIVE");
+    		nextExpectedActivity.setLocation(nextLeg.getLoadLocation());
+    		nextExpectedActivity.setVoyage(nextLeg.getVoyage());
+    	}
+    	else if (lastEvent.getHandlingEventType() == "RECEIVE") {
+    		nextExpectedActivity.setType("LOAD");
+    		lastEvent = new LastCargoHandledEvent (1, "RECEIVE", "", "");
+    	}
+    	else if (lastEvent.getHandlingEventType() == "LOAD") {
+    		nextExpectedActivity.setType("UNLOAD");
+    		nextExpectedActivity.setLocation(new Location(lastEvent.getHandlingEventLocation()));
+    		nextExpectedActivity.setVoyage(new Voyage(lastEvent.getHandlingEventVoyage()));
+    		
+    		lastEvent = new LastCargoHandledEvent (1, "LOAD", "", "");
+    	}
+    	else if (lastEvent.getHandlingEventType() == "UNLOAD") {
+    		List<Leg> legs = itinerary.getLegs();
+    		if (legs.isEmpty()) return NO_ACTIVITY;
+    		
     		ListIterator<Leg> iterator = legs.listIterator();
     		while (iterator.hasNext()) {
     			Leg l = iterator.next();    		
     			if (currentVoyage.getVoyageId().equals(l.getVoyage().getVoyageId())) break;
     		}
-
-    		Leg nextLeg = iterator.next();    		
-    		String nextEventType = "UNKNOWN";
     		
-    		if (lastEvent !=null) {    			
-    			switch (lastEvent.getHandlingEventType()) {
-            		case "LOAD":
-            			nextEventType = "UNLOAD";
-            			break;
-            		case "UNLOAD":
-            			if (nextLeg != null) nextEventType = "LOAD";
-            			else nextEventType = "CUSTOMS";
-            			
-            			break;
-            		default:
-            			nextEventType = "UNKNOWN";
-    			}
+    		Leg nextLeg=null;
+    		if (iterator.hasNext()) nextLeg = iterator.next(); 
+    		
+    		if (nextLeg != null) {
+        		nextExpectedActivity.setType("LOAD");
+        		nextExpectedActivity.setLocation(nextLeg.getLoadLocation());
+        		nextExpectedActivity.setVoyage(nextLeg.getVoyage());
     		}
-
-    		if (nextLeg !=null) {
-    			System.out.println("HANDLIGNTYPE="+nextEventType);
-    			System.out.println("VOYAGE="+nextLeg.getVoyage().getVoyageId());
-    			CargoHandlingActivity nextActivity = new CargoHandlingActivity(nextEventType, nextLeg.getLoadLocation(), nextLeg.getVoyage());
-    			System.out.println("nextActivity="+nextActivity.toString());
-    			return nextActivity;
+    		else {
+        		nextExpectedActivity.setType("CUSTOMS");
+        		nextExpectedActivity.setLocation(new Location(lastEvent.getHandlingEventLocation()));
+        		nextExpectedActivity.setVoyage(new Voyage(lastEvent.getHandlingEventVoyage()));
     		}
+    		
+    		lastEvent = new LastCargoHandledEvent (1, "LOAD", "", "");
     	}
     	
-    	return NO_ACTIVITY;
+    	return nextExpectedActivity;
     }
 
     public RoutingStatus getRoutingStatus() { return this.routingStatus;}

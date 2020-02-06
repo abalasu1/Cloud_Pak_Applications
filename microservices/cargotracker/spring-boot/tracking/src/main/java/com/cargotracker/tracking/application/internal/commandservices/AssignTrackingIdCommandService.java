@@ -2,7 +2,9 @@ package com.cargotracker.tracking.application.internal.commandservices;
 
 import com.cargotracker.tracking.domain.model.aggregates.TrackingActivity;
 import com.cargotracker.tracking.domain.model.aggregates.TrackingNumber;
+import com.cargotracker.tracking.domain.model.commands.AddTrackingEventCommand;
 import com.cargotracker.tracking.domain.model.commands.AssignTrackingNumberCommand;
+import com.cargotracker.tracking.domain.model.entities.BookingId;
 import com.cargotracker.tracking.infrastructure.repositories.TrackingRepository;
 
 import java.util.UUID;
@@ -24,7 +26,7 @@ public class AssignTrackingIdCommandService {
      */
     public TrackingNumber assignTrackingNumberToCargo(AssignTrackingNumberCommand assignTrackingNumberCommand){
         String trackingNumber = nextTrackingNumber();
-        System.out.println("Tracking Number" + trackingNumber);
+        //System.out.println("Tracking Number" + trackingNumber);
         assignTrackingNumberCommand.setTrackingNumber(trackingNumber);
         
         TrackingActivity activity = new TrackingActivity(assignTrackingNumberCommand);
@@ -38,12 +40,15 @@ public class AssignTrackingIdCommandService {
      * Service Command method to assign a route to a Cargo
      * @param addTrackingEventCommand
      */
-    /*public void addTrackingEvent(AddTrackingEventCommand addTrackingEventCommand){
-        TrackingActivity trackingActivity = trackingRepository.find(
+    public String addTrackingEvent(AddTrackingEventCommand addTrackingEventCommand){
+        TrackingActivity trackingActivity = trackingRepository.findByBookingNumber(
                         new BookingId(addTrackingEventCommand.getBookingId()));
         trackingActivity.addTrackingEvent(addTrackingEventCommand);
+        
+        System.out.println("TRACKINGACTIVITY=" + addTrackingEventCommand.getBookingId() + "***" + addTrackingEventCommand.getEventType());
         trackingRepository.save(trackingActivity);
-    }*/
+        return "Tracking Event Added";
+    }
     
     public String nextTrackingNumber() {
         String random = UUID.randomUUID().toString().toUpperCase();

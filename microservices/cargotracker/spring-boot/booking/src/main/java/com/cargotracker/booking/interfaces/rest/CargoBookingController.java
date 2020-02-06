@@ -40,7 +40,7 @@ public class CargoBookingController {
     @PostMapping
     @ResponseBody
     public BookingId bookCargo(@RequestBody  BookCargoResource bookCargoResource){
-        System.out.println("****Cargo Booked ****"+bookCargoResource.getBookingAmount());
+        //System.out.println("****Cargo Booked ****"+bookCargoResource.getBookingAmount());
         BookingId bookingId  = cargoBookingCommandService.bookCargo(BookCargoCommandDTOAssembler.toCommandFromDTO(bookCargoResource));
 
         return bookingId;

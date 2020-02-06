@@ -29,6 +29,7 @@ public class CargoHandlingActivity implements Serializable {
     private Location location;
     
     @Column(name = "next_expected_voyage_id")
+    @AttributeOverride(name = "voyageid", column = @Column(name = "next_expected_voyageid"))
     private Voyage voyage;
 
     public CargoHandlingActivity() {

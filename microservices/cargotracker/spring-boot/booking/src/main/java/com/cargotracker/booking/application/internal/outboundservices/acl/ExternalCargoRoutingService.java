@@ -6,6 +6,7 @@ import com.cargotracker.booking.domain.model.valueobjects.RouteSpecification;
 import com.cargotracker.shareddomain.model.TransitEdge;
 import com.cargotracker.shareddomain.model.TransitPath;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,6 +20,9 @@ import java.util.Map;
  */
 @Service
 public class ExternalCargoRoutingService {
+	@Value("${spring.profiles.active:localhost}")
+	private String activeProfile;
+	
     /**
      * The Booking Bounded Context makes an external call to the Routing Service of the Routing Bounded Context to
      * fetch the Optimal Itinerary for a Cargo based on the Route Specification
@@ -31,8 +35,11 @@ public class ExternalCargoRoutingService {
         params.put("origin",routeSpecification.getOrigin().getUnLocCode());
         params.put("destination",routeSpecification.getDestination().getUnLocCode());
         params.put("arrivalDeadline",routeSpecification.getArrivalDeadline().toString());
-
-        TransitPath transitPath = restTemplate.getForObject("http://localhost:8003/cargorouting/optimalRoute?origin=&destination=&deadline=",
+        
+        String host = "routing";
+        if (activeProfile.equals("local")) host = "localhost";
+        
+        TransitPath transitPath = restTemplate.getForObject("http://" + host + ":8003/cargorouting/optimalRoute?origin=&destination=&deadline=",
                     TransitPath.class,params);
 
 

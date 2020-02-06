@@ -18,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 import javax.persistence.Embedded;
 
 @Entity
@@ -52,9 +53,9 @@ public class TrackingActivity {
      * @param assignTrackingNumberCommand
      */
     public TrackingActivity(AssignTrackingNumberCommand assignTrackingNumberCommand){
-        this.trackingNumber = new TrackingNumber(assignTrackingNumberCommand.getTrackingNumber());
+    	this.trackingNumber = new TrackingNumber(assignTrackingNumberCommand.getTrackingNumber());
         this.bookingId = new BookingId((assignTrackingNumberCommand.getBookingId()));
-        this.trackingActivityEvent = TrackingActivityEvent.EMPTY_ACTIVITY;
+        //this.trackingActivityEvent = TrackingActivityEvent.EMPTY_ACTIVITY;
         /*this.trackingActivityEvent.getTrackingEvents().add(
                 new TrackingEvent(
                 new TrackingVoyageNumber(""),
@@ -71,9 +72,10 @@ public class TrackingActivity {
                 new TrackingVoyageNumber(addTrackingEventCommand.getVoyageNumber()),
                 new TrackingLocation(addTrackingEventCommand.getLocation()),
                 new TrackingEventType(addTrackingEventCommand.getEventType(),addTrackingEventCommand.getEventTime()));
-        this.trackingActivityEvent.getTrackingEvents().add(trackingEvent);
+        //System.out.println("******TRACKINGEVENT******="+addTrackingEventCommand.getEventType());
+        this.trackingActivityEvent.addTrackingEvent(trackingEvent);
     }
-
+    
     public TrackingNumber getTrackingNumber(){
         return this.trackingNumber;
     }
@@ -85,4 +87,21 @@ public class TrackingActivity {
     public TrackingActivityEvent getTrackingActivityEvents() {
         return this.trackingActivityEvent;
     }
+
+
+	public void setTrackingActivityEvents(TrackingActivityEvent trackingActivityEvent) {
+		this.trackingActivityEvent = trackingActivityEvent;
+	}
+
+	public TrackingActivityEvent getTrackingActivityEvent() {
+		return trackingActivityEvent;
+	}
+
+	public void setTrackingNumber(TrackingNumber trackingNumber) {
+		this.trackingNumber = trackingNumber;
+	}
+
+	public void setBookingId(BookingId bookingId) {
+		this.bookingId = bookingId;
+	}
 }
