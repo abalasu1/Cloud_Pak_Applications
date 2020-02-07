@@ -36,7 +36,7 @@ public class ExternalCargoRoutingService {
         params.put("destination",routeSpecification.getDestination().getUnLocCode());
         params.put("arrivalDeadline",routeSpecification.getArrivalDeadline().toString());
         
-        String host = "routing";
+        String host = "routing.routing";
         if (activeProfile.equals("local")) host = "localhost";
         
         TransitPath transitPath = restTemplate.getForObject("http://" + host + ":8003/cargorouting/optimalRoute?origin=&destination=&deadline=",
