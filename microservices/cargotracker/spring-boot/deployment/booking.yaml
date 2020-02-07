@@ -59,15 +59,17 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  annotations:
+    openshift.io/host.generated: "true"
   labels:
     app: booking
   name: booking
   namespace: booking
 spec:
-  host: booking.apps.eu-3.os.fyre.ibm.com
+  host: booking-booking.apps.eu-3.os.fyre.ibm.com
+  port:
+    targetPort: 8001
   subdomain: ""
-  tls:
-    termination: passthrough
   to:
     kind: Service
     name: booking

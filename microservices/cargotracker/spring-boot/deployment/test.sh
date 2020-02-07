@@ -1,4 +1,4 @@
-booking=$(curl -s -X POST http://9.30.25.26:30727/cargobooking -H 'Content-Type: application/json' \
+booking=$(curl -s -X POST http://booking.apps.eu-3.os.fyre.ibm.com/cargobooking -H 'Content-Type: application/json' \
   -d '{
     "bookingAmount": 100,
     "originLocation": "CNHKG",
@@ -11,7 +11,7 @@ bookingId=$(echo $bookingId | awk -F '[_-]' '{print $1}')
 echo $bookingId 
 
 curl -s -X GET 'http://9.30.25.26:32497/cargorouting/optimalRoute?origin=CNHKG&destination=USNYC&deadline=2020-01-28' | jq
-curl -s -X GET 'http://9.30.25.26:30727/cargobooking/findCargo?bookingId='$bookingId'' | jq
+curl -s -X GET 'http://booking.apps.eu-3.os.fyre.ibm.com/cargobooking/findCargo?bookingId='$bookingId'' | jq
 
 routing=$(curl -s -X POST http://9.30.25.26:30727/cargorouting -H 'Content-Type: application/json' \
   -d '{
