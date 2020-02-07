@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: routing
-  namespace: cargotracker
+  namespace: routing
   labels:
     app: routing
 spec:
@@ -44,7 +44,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: routing
-  namespace: cargotracker
+  namespace: routing
   labels:
     app: routing
 spec:

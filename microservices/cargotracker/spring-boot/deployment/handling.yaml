@@ -2,7 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: handling
-  namespace: cargotracker
+  namespace: handling
   labels:
     app: handling
 spec:
@@ -44,7 +44,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: handling
-  namespace: cargotracker
+  namespace: handling
   labels:
     app: handling
 spec:
