@@ -9,7 +9,7 @@ deploy-booking:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/booking.yaml  | oc apply -f -
 
 clean-booking:
-        -oc delete all -l app=booking
+	-oc delete all -l app=booking
 
 init-handling:
 	-oc new-project handling
@@ -27,7 +27,7 @@ deploy-routing:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/routing.yaml  | oc apply -f -
 
 clean-routing:
-        -oc delete all -l app=routing
+	-oc delete all -l app=routing
 
 init-tracking:
 	-oc new-project tracking
@@ -36,4 +36,4 @@ deploy-tracking:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/tracking.yaml  | oc apply -f -
 
 clean-tracking:
-        -oc delete all -l app=tracking
+	-oc delete all -l app=tracking
