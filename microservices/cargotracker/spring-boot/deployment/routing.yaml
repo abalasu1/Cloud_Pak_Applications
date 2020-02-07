@@ -55,3 +55,21 @@ spec:
     targetPort: 8003
   selector:
     app: routing
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: routing
+  name: routing
+  namespace: routing
+spec:
+  host: routing.apps.eu-3.os.fyre.ibm.com
+  subdomain: ""
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: routing
+    weight: 100
+  wildcardPolicy: None

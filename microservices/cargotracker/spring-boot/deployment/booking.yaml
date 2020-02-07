@@ -48,10 +48,28 @@ metadata:
   labels:
     app: booking
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: "8001"
     port: 8001
     targetPort: 8001
   selector:
     app: booking
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: booking
+  name: booking
+  namespace: booking
+spec:
+  host: booking.apps.eu-3.os.fyre.ibm.com
+  subdomain: ""
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: booking
+    weight: 100
+  wildcardPolicy: None

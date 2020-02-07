@@ -55,3 +55,21 @@ spec:
     targetPort: 8002
   selector:
     app: tracking
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: tracking
+  name: tracking
+  namespace: tracking
+spec:
+  host: tracking.apps.eu-3.os.fyre.ibm.com
+  subdomain: ""
+  tls:
+    termination: passthrough
+  to:
+    kind: Service
+    name: tracking
+    weight: 100
+  wildcardPolicy: None
