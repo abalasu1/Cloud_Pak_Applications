@@ -1,4 +1,4 @@
-booking=$(curl -s -X POST http://booking.apps.eu-3.os.fyre.ibm.com/cargobooking -H 'Content-Type: application/json' \
+booking=$(curl -s -X POST http://booking-booking.apps.eu-3.os.fyre.ibm.com/cargobooking -H 'Content-Type: application/json' \
   -d '{
     "bookingAmount": 100,
     "originLocation": "CNHKG",
@@ -10,16 +10,16 @@ bookingId=$(echo `jq -r  .bookingId <<< "${booking}"`)
 bookingId=$(echo $bookingId | awk -F '[_-]' '{print $1}')
 echo $bookingId 
 
-curl -s -X GET 'http://9.30.25.26:32497/cargorouting/optimalRoute?origin=CNHKG&destination=USNYC&deadline=2020-01-28' | jq
-curl -s -X GET 'http://booking.apps.eu-3.os.fyre.ibm.com/cargobooking/findCargo?bookingId='$bookingId'' | jq
+curl -s -X GET 'http://routing-routing.apps.eu-3.os.fyre.ibm.com/cargorouting/optimalRoute?origin=CNHKG&destination=USNYC&deadline=2020-01-28' | jq
+curl -s -X GET 'http://booking-booking.apps.eu-3.os.fyre.ibm.com/cargobooking/findCargo?bookingId='$bookingId'' | jq
 
-routing=$(curl -s -X POST http://9.30.25.26:30727/cargorouting -H 'Content-Type: application/json' \
+routing=$(curl -s -X POST http://routing-routing.apps.eu-3.os.fyre.ibm.com/cargorouting -H 'Content-Type: application/json' \
   -d '{
     "bookingId": "'$bookingId'"
 }')
 echo $routing
 
-receive=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+receive=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHKG",
     "handlingType" : "RECEIVE",
@@ -28,7 +28,7 @@ receive=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type
 }')
 echo $receive
 
-firstload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+firstload=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHKG",
     "handlingType" : "LOAD",
@@ -37,7 +37,7 @@ firstload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Ty
 }')
 echo $firstload
 
-firstunload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+firstunload=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHGH",
     "handlingType" : "UNLOAD",
@@ -46,7 +46,7 @@ firstunload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-
 }')
 echo $firstunload
 
-secondload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+secondload=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHGH",
     "handlingType" : "LOAD",
@@ -55,7 +55,7 @@ secondload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-T
 }')
 echo $secondload
 
-secondunload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+secondunload=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "JNTKO",
     "handlingType" : "UNLOAD",
@@ -64,7 +64,7 @@ secondunload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content
 }')
 echo $secondunload
 
-thirdload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+thirdload=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "JNTKO",
     "handlingType" : "LOAD",
@@ -73,7 +73,7 @@ thirdload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Ty
 }')
 echo $thirdload
 
-thirdunload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+thirdunload=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "USNYC",
     "handlingType" : "UNLOAD",
@@ -82,7 +82,7 @@ thirdunload=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-
 }')
 echo $thirdunload
 
-customs=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+customs=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "USNYC",
     "handlingType" : "CUSTOMS",
@@ -91,7 +91,7 @@ customs=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type
 }')
 echo $customs
 
-claim=$(curl -s -X POST http://9.30.25.26:31675/cargohandling -H 'Content-Type: application/json' -d '{
+claim=$(curl -s -X POST http://handling-handling.apps.eu-3.os.fyre.ibm.com/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "USNYC",
     "handlingType" : "CLAIM",
