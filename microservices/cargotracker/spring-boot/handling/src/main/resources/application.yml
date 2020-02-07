@@ -10,11 +10,11 @@ spring:
           destination: cargoHandlings2
           group: cargoHandlingsQueue2         
   datasource:
-    url: "jdbc:mysql://mysql:3306/handlingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    url: "jdbc:mysql://mysql.cargotracker:3306/handlingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
     username: handlingmsdb
     password: handlingmsdb
   rabbitmq:
-    host: rabbitmq
+    host: rabbitmq.cargotracker
     port: 5672
     username: guest
     password: guest

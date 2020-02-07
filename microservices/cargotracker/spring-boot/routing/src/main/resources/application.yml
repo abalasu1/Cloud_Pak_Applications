@@ -1,11 +1,11 @@
 spring:
   profiles: ocp
   datasource:
-    url: "jdbc:mysql://mysql:3306/routingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    url: "jdbc:mysql://mysql.cargotracker:3306/routingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
     username: routingmsdb
     password: routingmsdb
   rabbitmq:
-    host: rabbitmq
+    host: rabbitmq.cargotracker
     port: 5672
     username: guest
     password: guest
