@@ -13,7 +13,7 @@ echo $bookingId
 curl -s -X GET 'http://routing-routing.apps.eu-3.os.fyre.ibm.com/cargorouting/optimalRoute?origin=CNHKG&destination=USNYC&deadline=2020-01-28' | jq
 curl -s -X GET 'http://booking-booking.apps.eu-3.os.fyre.ibm.com/cargobooking/findCargo?bookingId='$bookingId'' | jq
 
-routing=$(curl -s -X POST http://routing-routing.apps.eu-3.os.fyre.ibm.com/cargorouting -H 'Content-Type: application/json' \
+routing=$(curl -s -X POST http://booking-booking.apps.eu-3.os.fyre.ibm.com/cargorouting -H 'Content-Type: application/json' \
   -d '{
     "bookingId": "'$bookingId'"
 }')
