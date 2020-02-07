@@ -48,7 +48,7 @@ metadata:
   labels:
     app: routing
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: "8003"
     port: 8003

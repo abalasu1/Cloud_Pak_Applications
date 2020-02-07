@@ -48,7 +48,7 @@ metadata:
   labels:
     app: handling
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: "8004"
     port: 8004
