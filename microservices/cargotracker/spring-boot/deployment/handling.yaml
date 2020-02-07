@@ -59,15 +59,17 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  annotations:
+    openshift.io/host.generated: "true"
   labels:
     app: handling
   name: handling
   namespace: handling
 spec:
-  host: handling.apps.eu-3.os.fyre.ibm.com
+  host: handling-handling.apps.eu-3.os.fyre.ibm.com
+  port:
+    targetPort: 8004
   subdomain: ""
-  tls:
-    termination: passthrough
   to:
     kind: Service
     name: handling

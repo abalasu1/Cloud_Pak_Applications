@@ -59,15 +59,17 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  annotations:
+    openshift.io/host.generated: "true"
   labels:
     app: routing
   name: routing
   namespace: routing
 spec:
-  host: routing.apps.eu-3.os.fyre.ibm.com
+  host: routing-routing.apps.eu-3.os.fyre.ibm.com
+  port:
+    targetPort: 8003
   subdomain: ""
-  tls:
-    termination: passthrough
   to:
     kind: Service
     name: routing

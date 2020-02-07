@@ -59,15 +59,17 @@ spec:
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
+  annotations:
+    openshift.io/host.generated: "true"
   labels:
     app: tracking
   name: tracking
   namespace: tracking
 spec:
-  host: tracking.apps.eu-3.os.fyre.ibm.com
+  host: tracking-tracking.apps.eu-3.os.fyre.ibm.com
+  port:
+    targetPort: 8002
   subdomain: ""
-  tls:
-    termination: passthrough
   to:
     kind: Service
     name: tracking
