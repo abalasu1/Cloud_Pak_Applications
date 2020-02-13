@@ -24,7 +24,7 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-      environment: dev
+      environment: test
 ---
 spring:
   profiles:
