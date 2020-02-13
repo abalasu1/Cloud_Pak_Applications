@@ -1,0 +1,52 @@
+spring:
+  profiles: ocp
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+  datasource:
+    url: "jdbc:mysql://localhost:3306/bookingquerymsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: bookingquerymsdb
+    password: bookingquerymsdb
+  application:
+    name: booking        
+
+server:
+  port: 8081
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: test
+---
+spring:
+  profiles:
+    active: local
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    generate-ddl: true
+  datasource:
+    url: "jdbc:mysql://localhost:3306/bookingquerymsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: bookingquerymsdb
+    password: bookingquerymsdb
+  application:
+    name: booking        
+
+server:
+  port: 8081
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: dev
