@@ -1,0 +1,46 @@
+spring:
+  profiles: ocp
+  datasource:
+    url: "jdbc:mysql://mysql.cargotracker:3306/routingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: routingmsdb
+    password: routingmsdb
+  application:
+    name: routing        
+
+server:
+  port: 8083
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: test
+---
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: "jdbc:mysql://localhost:3306/routingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: routingmsdb
+    password: routingmsdb
+  application:
+    name: routing        
+
+server:
+  port: 8083
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: dev

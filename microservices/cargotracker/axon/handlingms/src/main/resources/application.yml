@@ -1,0 +1,70 @@
+spring:
+  profiles: ocp
+  datasource:
+    url: "jdbc:mysql://mysql.cargotracker:3306/handlingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: handlingmsdb
+    password: handlingmsdb
+  cloud:
+    stream:
+      bindings:     
+        cargoBookingChannel:
+          destination: cargoHandlings
+          group: cargoHandlingsQueue    
+  rabbitmq:
+    host: rabbitmq.cargotracker
+    port: 5672
+    username: guest
+    password: guest
+        
+  application:
+    name: handling        
+
+server:
+  port: 8082
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: test
+---
+spring:
+  profiles:
+    active: local
+  datasource:
+    url: "jdbc:mysql://localhost:3306/handlingmsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    username: handlingmsdb
+    password: handlingmsdb
+  cloud:
+    stream:
+      bindings:     
+        cargoBookingChannel:
+          destination: cargoHandlings
+          group: cargoHandlingsQueue    
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+        
+  application:
+    name: handling        
+
+server:
+  port: 8082
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: dev
