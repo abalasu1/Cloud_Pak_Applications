@@ -4,7 +4,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
     generate-ddl: true
   datasource:
-    url: "jdbc:mysql://localhost:3306/bookingquerymsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
+    url: "jdbc:mysql://mysql.cargotracker:3306/bookingquerymsdb?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=EST"
     username: bookingquerymsdb
     password: bookingquerymsdb
   application:
