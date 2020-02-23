@@ -1,4 +1,5 @@
 FROM golang:alpine AS build-env
+ENV CGO_ENABLED=0
 RUN mkdir /app
 COPY main.go  /app/main.go
 RUN cd /app && go build -o goapp
