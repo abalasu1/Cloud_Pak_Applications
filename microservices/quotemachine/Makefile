@@ -7,7 +7,7 @@ QUOTEAPI=$(DOCKERREPOSITORY)/$(PROJECT)/quoteapi
 GITHUBREPO=https://github.com/abalasu1/Cloud_Pak_Applications.git
 
 init-all: init init-quote-api
-clean-all: clean
+clean-all: clean clean-quote-api
 
 init:
 	-oc new-project $(PROJECT)
@@ -22,7 +22,10 @@ build-quote-api:
 	oc start-build quoteapi	
 
 deploy-quote-api:
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/deploymentconfig.yaml  | oc apply -f -	
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/deploymentconfig.yaml  | oc apply -f -
+
+clean-quote-api:
+	-oc delete all -l app=quoteapi
 
 clean:
-	-oc delete all -l app=$(PROJECT)
+	-oc delete project $(PROJECT)
