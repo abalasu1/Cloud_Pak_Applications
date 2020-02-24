@@ -7,10 +7,10 @@ metadata:
   namespace: <PROJECT>
 spec:
   ports:
-  - name: 8080-tcp
-    port: 8080
+  - name: 8001-tcp
+    port: 8001
     protocol: TCP
-    targetPort: 8080
+    targetPort: 8001
   selector:
     deploymentconfig: quoteapi
   type: ClusterIP

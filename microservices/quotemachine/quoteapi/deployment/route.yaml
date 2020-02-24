@@ -9,7 +9,7 @@ spec:
   host: <DOMAIN>
   path: /quoteapi
   port:
-    targetPort: 8080-tcp
+    targetPort: 8001-tcp
   to:
     kind: Service
     name: quoteapi

@@ -29,7 +29,7 @@ spec:
         imagePullPolicy: Always
         name: quoteapi
         ports:
-        - containerPort: 8080
+        - containerPort: 8001
           protocol: TCP
   test: false
   triggers:
