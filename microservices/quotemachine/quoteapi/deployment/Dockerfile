@@ -10,4 +10,6 @@ FROM openjdk:8-jre-alpine
 WORKDIR /app
 
 COPY --from=MAVEN_BUILD /build/target/quoteapi-1.0.0.jar /app/
+
+EXPOSE 8001
 ENTRYPOINT ["java", "-jar", "quoteapi-1.0.0.jar"]
