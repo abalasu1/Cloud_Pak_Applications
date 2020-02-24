@@ -14,7 +14,8 @@ init:
 
 init-quote-api:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/service.yaml  | oc apply -f -
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/route.yaml  | oc apply -f -
+	-echo quoteapi.$(SUBDOMAIN)
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~quoteapi.$(SUBDOMAIN)~g' ./quoteapi/deployment/route.yaml  | oc apply -f -
 
 build-quote-api:
 	-sed -e 's~<CONTAINER>~$(QUOTEAPI)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/imagestream.yaml  | oc apply -f -
