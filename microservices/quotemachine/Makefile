@@ -10,7 +10,7 @@ init-all: init init-quote-api
 clean-all: clean
 
 init:
-	-oc new-project quote-machine
+	-oc new-project $(PROJECT)
 
 init-quote-api:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/service.yaml  | oc apply -f -
@@ -25,4 +25,4 @@ deploy-quote-api:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/deployment.yaml  | oc apply -f -	
 
 clean:
-	-oc delete all -l app=quote-machine
+	-oc delete all -l app=$(PROJECT)
