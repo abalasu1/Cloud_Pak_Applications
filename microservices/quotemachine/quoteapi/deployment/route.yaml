@@ -7,7 +7,6 @@ metadata:
   namespace: <PROJECT>
 spec:
   host: <DOMAIN>
-  path: /quoteapi
   port:
     targetPort: 8001-tcp
   to:
