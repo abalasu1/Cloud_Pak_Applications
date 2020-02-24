@@ -1,0 +1,23 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: quoteserver
+  name: quoteserver
+  namespace: <PROJECT>
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: quoteserver:latest
+  runPolicy: Serial
+  source:
+    contextDir: microservices/quotemachine/quoteserver
+    git:
+      ref: master
+      uri: <GITHUBREPO>
+    type: Git
+  strategy:
+    dockerStrategy:
+      dockerfilePath: ./deployment/Dockerfile
+    type: Source

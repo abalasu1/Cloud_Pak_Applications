@@ -1,0 +1,15 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: quoteserver
+  name: quoteserver
+  namespace: <PROJECT>
+spec:
+  lookupPolicy:
+    local: true
+status:
+  dockerImageRepository: <CONTAINER>
+  tags:
+  - items:
+    tag: latest

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: quoteserver
+  name: quoteserver
+  namespace: <PROJECT>
+spec:
+  ports:
+  - name: 8002-tcp
+    port: 8002
+    protocol: TCP
+    targetPort: 8002
+  selector:
+    deploymentconfig: quoteserver
+  type: ClusterIP
