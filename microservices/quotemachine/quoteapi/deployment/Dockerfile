@@ -9,5 +9,5 @@ RUN mvn package
 FROM openjdk:8-jre-alpine
 WORKDIR /app
 
-COPY --from=MAVEN_BUILD /build/target/quoteapi-1.0.0 /app/
+COPY --from=MAVEN_BUILD /build/target/quoteapi-1.0.0.jar /app/
 ENTRYPOINT ["java", "-jar", "quoteapi-1.0.0.jar"]
