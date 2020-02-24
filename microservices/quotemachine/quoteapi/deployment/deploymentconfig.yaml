@@ -40,6 +40,6 @@ spec:
       from:
         kind: ImageStreamTag
         name: quoteapi:latest
-        namespace: calculator
+        namespace: <PROJECT>
     type: ImageChange
   - type: ConfigChange

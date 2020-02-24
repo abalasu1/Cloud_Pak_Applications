@@ -22,7 +22,7 @@ build-quote-api:
 	oc start-build quoteapi	
 
 deploy-quote-api:
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/deployment.yaml  | oc apply -f -	
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./quoteapi/deployment/deploymentconfig.yaml  | oc apply -f -	
 
 clean:
 	-oc delete all -l app=$(PROJECT)
