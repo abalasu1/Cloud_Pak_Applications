@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: quoteserver
+  profiles:
+    active: default 
+    
+server:
+  port: 8002
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: ${spring.profiles.active} 
+      
+  endpoint:
+    shutdown:
+      enabled: true 

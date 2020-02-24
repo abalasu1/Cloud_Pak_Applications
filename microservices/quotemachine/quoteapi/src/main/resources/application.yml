@@ -1,0 +1,32 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+---
+
+spring:
+  application:
+    name: quotes
+  profiles:
+    active: default 
+  jpa:
+    database: HSQL
+    
+server:
+  port: 8001
+  
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      environment: ${spring.profiles.active} 
+      
+  endpoint:
+    shutdown:
+      enabled: true 
