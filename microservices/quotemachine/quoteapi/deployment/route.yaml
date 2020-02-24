@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: quoteapi
+  name: quoteapi
+  namespace: <PROJECT>
+spec:
+  host: <DOMAIN>
+  path: /basicop/quoteapi
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: quoteapi
+    weight: 100
+  wildcardPolicy: None
