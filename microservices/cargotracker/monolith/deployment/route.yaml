@@ -1,0 +1,16 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: cargotracker
+  name: cargotracker
+  namespace: <PROJECT>
+spec:
+  host: <DOMAIN>
+  port:
+    targetPort: 9080-tcp
+  to:
+    kind: Service
+    name: cargotracker
+    weight: 100
+  wildcardPolicy: None
