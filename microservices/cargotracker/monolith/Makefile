@@ -9,7 +9,7 @@ CARGOTRACKER=$(DOCKERREPOSITORY)/$(PROJECT)/cargotracker
 init:
 	-oc new-project $(PROJECT)
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/service.yaml  | oc apply -f -
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/route.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~cargotracker.$(SUBDOMAIN)~g' ./deployment/route.yaml  | oc apply -f -
 
 build:
 	-sed -e 's~<CONTAINER>~$(CARGOTRACKER)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./monolith/deployment/imagestream.yaml  | oc apply -f -
