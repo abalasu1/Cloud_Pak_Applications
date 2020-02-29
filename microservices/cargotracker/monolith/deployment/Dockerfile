@@ -19,7 +19,8 @@ RUN mkdir -p /config/apps && \
         cp ./src/main/liberty/lib/mysql-connector-java-8.0.17.jar /config/lib/mysql-connector-java-8.0.17.jar; \
     fi
 
-FROM ibmcom/websphere-liberty:webProfile7-ubi-min-amd64
+#FROM ibmcom/websphere-liberty:webProfile7-ubi-min-amd64
+FROM ibmcom/websphere-liberty:19.0.0.9-webProfile8
 
 ARG SSL=true
 
