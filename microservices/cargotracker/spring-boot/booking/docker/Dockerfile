@@ -1,6 +1,15 @@
-FROM anapsix/alpine-java:8
-ARG JAR_FILE
-VOLUME /tmp
-ADD ${JAR_FILE} app.jar
-RUN bash -c 'touch /app.jar'
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+FROM maven:3.6.3-ibmjava-8 AS MAVEN_BUILD
+
+COPY ../pom.xml /build/
+COPY ../src /build/src/
+
+WORKDIR /build/
+RUN mvn package
+
+FROM openjdk:8-jre-alpine
+WORKDIR /app
+
+COPY --from=MAVEN_BUILD /build/target/booking-1.0.0.jar /app/
+
+EXPOSE 8001
+ENTRYPOINT ["java", "-jar", "booking-1.0.0.jar"]
