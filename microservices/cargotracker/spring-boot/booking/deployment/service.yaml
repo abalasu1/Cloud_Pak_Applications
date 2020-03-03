@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: booking
+  namespace: booking
+  labels:
+    app: booking
+spec:
+  type: ClusterIP
+  ports:
+  - name: "8001"
+    port: 8001
+    targetPort: 8001
+  selector:
+    app: booking
