@@ -12,7 +12,7 @@ spec:
       name: booking:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/cargotracker/spring-boot
+    contextDir: microservices/cargotracker/spring-boot/booking
     git:
       ref: master
       uri: <GITHUBREPO>
