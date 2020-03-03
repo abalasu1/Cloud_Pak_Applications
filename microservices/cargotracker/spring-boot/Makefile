@@ -17,7 +17,7 @@ init-booking:
 build-booking:
 	-sed -e 's~<CONTAINER>~$(BOOKINGAPI)~g' -e 's~<PROJECT>~$(BOOKINGMS)~g' ./booking/deployment/imagestream.yaml  | oc apply -f -
 	-sed -e 's~<GITHUBREPO>~$(GITHUBREPO)~g' -e 's~<PROJECT>~$(BOOKINGMS)~g' ./booking/deployment/buildconfig.yaml  | oc apply -f -	
-	oc start-build bookingapi
+	oc start-build booking
 
 deploy-booking:
 	-sed -e 's~<PROJECT>~$(BOOKINGMS)~g' ./booking/deploymentconfig.yaml  | oc apply -f -
