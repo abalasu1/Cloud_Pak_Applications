@@ -1,4 +1,4 @@
-booking=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargobooking -H 'Content-Type: application/json' -d '{
+booking=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargobooking -H 'Content-Type: application/json' -d '{
     "bookingAmount": 100,
     "originLocation": "CNHKG",
     "destLocation" : "USNYC",
@@ -7,12 +7,12 @@ booking=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargob
 bookingId=$(echo `jq -r  .bookingId <<< "${booking}"`)
 echo $bookingId
 
-curl -s -X GET "http://9.30.25.26:31836/cargotracker/serviceapi/voyageRouting/optimalRoute?origin=CNHKG&destination=USNYC&deadline=2020-01-28" | jq
+curl -s -X GET "http://$1/cargotracker/serviceapi/voyageRouting/optimalRoute?origin=CNHKG&destination=USNYC&deadline=2020-01-28" | jq
 
-routing=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargorouting -H 'Content-Type: application/json' -d $booking)
+routing=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargorouting -H 'Content-Type: application/json' -d $booking)
 echo $routing
 
-receive=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+receive=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHKG",
     "handlingType" : "RECEIVE",
@@ -21,7 +21,7 @@ receive=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargoh
 }')
 echo $receive
 
-firstload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+firstload=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHKG",
     "handlingType" : "LOAD",
@@ -30,7 +30,7 @@ firstload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/carg
 }')
 echo $firstload
 
-firstunload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+firstunload=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHGH",
     "handlingType" : "UNLOAD",
@@ -39,7 +39,7 @@ firstunload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/ca
 }')
 echo $firstunload
 
-secondload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+secondload=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "CNHGH",
     "handlingType" : "LOAD",
@@ -48,7 +48,7 @@ secondload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/car
 }')
 echo $secondload
 
-secondunload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+secondunload=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "JNTKO",
     "handlingType" : "UNLOAD",
@@ -57,7 +57,7 @@ secondunload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/c
 }')
 echo $secondunload
 
-thirdload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+thirdload=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "JNTKO",
     "handlingType" : "LOAD",
@@ -66,7 +66,7 @@ thirdload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/carg
 }')
 echo $thirdload
 
-thirdunload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+thirdunload=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "USNYC",
     "handlingType" : "UNLOAD",
@@ -75,7 +75,7 @@ thirdunload=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/ca
 }')
 echo $thirdunload
 
-customs=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+customs=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "USNYC",
     "handlingType" : "CUSTOMS",
@@ -84,7 +84,7 @@ customs=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargoh
 }')
 echo $customs
 
-claim=$(curl -s -X POST http://9.30.25.26:31836/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
+claim=$(curl -s -X POST http://$1/cargotracker/serviceapi/cargohandling -H 'Content-Type: application/json' -d '{
     "bookingId" : "'$bookingId'",
     "unLocode" : "USNYC",
     "handlingType" : "CLAIM",

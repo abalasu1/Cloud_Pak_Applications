@@ -19,6 +19,12 @@ build:
 deploy:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/deploymentconfig.yaml  | oc apply -f -
 
+test-1:
+	-bash -c 'test/test-1.sh cargotracker.$(SUBDOMAIN)'
+
+test-2:
+	-bash -c 'test/test-2.sh cargotracker.$(SUBDOMAIN)'
+
 clean:
 	-oc delete all -l app=cargotracker-monolith
 	-oc delete $(PROJECT)
