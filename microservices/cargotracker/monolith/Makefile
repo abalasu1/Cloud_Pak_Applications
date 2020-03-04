@@ -11,6 +11,10 @@ init:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/service.yaml  | oc apply -f -
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~cargotracker.$(SUBDOMAIN)~g' ./deployment/route.yaml  | oc apply -f -
 
+init-db:
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/pvc.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/mysql.yaml  | oc apply -f -
+
 build:
 	-sed -e 's~<CONTAINER>~$(CARGOTRACKER)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/imagestream.yaml  | oc apply -f -
 	-sed -e 's~<GITHUBREPO>~$(GITHUBREPO)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./deployment/buildconfig.yaml  | oc apply -f -	
