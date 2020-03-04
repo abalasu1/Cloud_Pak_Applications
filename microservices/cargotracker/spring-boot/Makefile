@@ -11,6 +11,10 @@ build-all: build-booking build-handling build-routing build-tracking
 deploy-all: deploy-booking deploy-handling deploy-routing deploy-tracking
 clean-all: clean-booking clean-handling clean-routing clean-tracking
 
+init-db:
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./database/pvc.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./database/mysql.yaml  | oc apply -f -
+
 init-booking:
 	-oc new-project $(BOOKINGMS)
 
