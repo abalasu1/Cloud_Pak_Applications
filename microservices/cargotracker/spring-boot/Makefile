@@ -24,7 +24,7 @@ build-booking:
 	oc start-build booking
 
 deploy-booking:
-	-sed -e 's~<PROJECT>~$(BOOKINGMS)~g' ./booking/deploymentconfig.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(BOOKINGMS)~g' ./booking/deployment/deploymentconfig.yaml  | oc apply -f -
 
 clean-booking:
 	-oc delete all -l app=$(BOOKINGMS)
