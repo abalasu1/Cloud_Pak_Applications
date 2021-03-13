@@ -1,11 +1,11 @@
 PROJECT=calculator
 BUILDNS=calculator-build
 UINS=calculator-ui
-DOCKERREPOSITORY=docker-registry.default.svc:5000
+DOCKERREPOSITORY=image-registry.openshift-image-registry.svc:5000
 
 PROXYNODE=9.30.123.128
-PROXY=$(PROXYNODE):$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
-UIPROXY=$(PROXYNODE):$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
+PROXY=$(shell kubectl -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
+UIPROXY=$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
 
 BASICOPADD=$(DOCKERREPOSITORY)/$(BUILDNS)/add
 BASICOPSUB=$(DOCKERREPOSITORY)/$(BUILDNS)/subtract

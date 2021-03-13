@@ -3,7 +3,7 @@ BUILDNS=calculator-build
 UINS=calculator-ui
 DOCKERREPOSITORY=image-registry.openshift-image-registry.svc:5000
 
-PROXY=$(shell oc -n default get route istio-ingressgateway -o jsonpath='{.spec.host}')
+PROXY=$(shell oc -n istio-system get route istio-ingressgateway -o jsonpath='{.spec.host}')
 
 BASICOPADD=$(DOCKERREPOSITORY)/$(BUILDNS)/add
 BASICOPSUB=$(DOCKERREPOSITORY)/$(BUILDNS)/subtract

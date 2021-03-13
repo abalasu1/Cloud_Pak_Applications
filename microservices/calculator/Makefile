@@ -1,7 +1,7 @@
 PROJECT=calculator
 DOCKERREPOSITORY=docker-registry.default.svc:5000
 
-SUBDOMAIN=apps.9.30.34.153.xip.io
+SUBDOMAIN=apps.gsitest.cp.fyre.ibm.com
 
 BASICOPADD=$(DOCKERREPOSITORY)/$(PROJECT)/add
 BASICOPSUB=$(DOCKERREPOSITORY)/$(PROJECT)/subtract

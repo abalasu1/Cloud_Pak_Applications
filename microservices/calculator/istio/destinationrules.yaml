@@ -5,6 +5,10 @@ metadata:
   namespace: <PROJECT>  
 spec:
   host: add
+  subsets:
+  - name: v1
+    labels:
+      version: v1
   trafficPolicy:
     tls:
       mode: DISABLE   
@@ -16,6 +20,10 @@ metadata:
   namespace: <PROJECT>  
 spec:
   host: subtract
+  subsets:
+  - name: v1
+    labels:
+      version: v1
   trafficPolicy:
     tls:
       mode: DISABLE    
@@ -27,6 +35,10 @@ metadata:
   namespace: <PROJECT>  
 spec:
   host: multiply
+  subsets:
+  - name: v1
+    labels:
+      version: v1
   trafficPolicy:
     tls:
       mode: DISABLE    
@@ -38,6 +50,10 @@ metadata:
   namespace: <PROJECT>  
 spec:
   host: divide
+  subsets:
+  - name: v1
+    labels:
+      version: v1
   trafficPolicy:
     tls:
       mode: DISABLE
@@ -73,6 +89,10 @@ metadata:
   namespace: <PROJECT>  
 spec:
   host: processor
+  subsets:
+  - name: v1
+    labels:
+      version: v1
   trafficPolicy:
     tls:
       mode: DISABLE
