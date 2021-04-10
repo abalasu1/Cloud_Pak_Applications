@@ -7,6 +7,10 @@ metadata:
     app: compositeop
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: compositeop
+      version: v1
   template:
     metadata:
       annotations:
@@ -30,7 +34,7 @@ spec:
         - name: DIVURI
           value: "http://divide:8080/basicop/divide"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: compositeop-v2
@@ -39,6 +43,10 @@ metadata:
     app: compositeop
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: compositeop
+      version: v2
   template:
     metadata:
       annotations:
@@ -62,7 +70,7 @@ spec:
         - name: DIVURI
           value: "http://divide:8080/basicop/divide"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: compositeop-v3
@@ -71,6 +79,10 @@ metadata:
     app: compositeop
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: compositeop
+      version: v3
   template:
     metadata:
       annotations:

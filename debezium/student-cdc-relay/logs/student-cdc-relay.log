@@ -1,0 +1,114 @@
+2020-02-16 21:28:22.376  INFO 76993 --- [main] c.s.student.StudentCDCRelayApplication   : Starting StudentCDCRelayApplication on Arunsmac.local with PID 76993 (/Users/admin/Documents/ISL/Code/Cloud_Pak_Applications/debezium/student-cdc-relay/target/classes started by admin in /Users/admin/Documents/ISL/Code/Cloud_Pak_Applications/debezium/student-cdc-relay)
+2020-02-16 21:28:22.416  INFO 76993 --- [main] c.s.student.StudentCDCRelayApplication   : No active profile set, falling back to default profiles: default
+2020-02-16 21:28:24.111  INFO 76993 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2020-02-16 21:28:24.216  INFO 76993 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96ms. Found 1 repository interfaces.
+2020-02-16 21:28:25.314  INFO 76993 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-02-16 21:28:25.341  INFO 76993 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-16 21:28:25.341  INFO 76993 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.17]
+2020-02-16 21:28:25.515  INFO 76993 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-16 21:28:25.516  INFO 76993 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2963 ms
+2020-02-16 21:28:26.246  INFO 76993 --- [main] o.elasticsearch.plugins.PluginsService   : no modules loaded
+2020-02-16 21:28:26.247  INFO 76993 --- [main] o.elasticsearch.plugins.PluginsService   : loaded plugin [org.elasticsearch.index.reindex.ReindexPlugin]
+2020-02-16 21:28:26.247  INFO 76993 --- [main] o.elasticsearch.plugins.PluginsService   : loaded plugin [org.elasticsearch.join.ParentJoinPlugin]
+2020-02-16 21:28:26.247  INFO 76993 --- [main] o.elasticsearch.plugins.PluginsService   : loaded plugin [org.elasticsearch.percolator.PercolatorPlugin]
+2020-02-16 21:28:26.248  INFO 76993 --- [main] o.elasticsearch.plugins.PluginsService   : loaded plugin [org.elasticsearch.script.mustache.MustachePlugin]
+2020-02-16 21:28:26.248  INFO 76993 --- [main] o.elasticsearch.plugins.PluginsService   : loaded plugin [org.elasticsearch.transport.Netty4Plugin]
+2020-02-16 21:28:27.324  INFO 76993 --- [main] o.s.d.e.c.TransportClientFactoryBean     : Adding transport node : 127.0.0.1:9300
+2020-02-16 21:28:28.161 ERROR 76993 --- [main] .d.e.r.s.AbstractElasticsearchRepository : failed to load elasticsearch nodes : org.elasticsearch.client.transport.NoNodeAvailableException: None of the configured nodes are available: [{#transport#-1}{ij-hZBLDTbqR1tpTjSQhHw}{localhost}{127.0.0.1:9300}]
+2020-02-16 21:28:28.248  INFO 76993 --- [main] o.a.k.connect.json.JsonConverterConfig   : JsonConverterConfig values: 
+	converter.type = key
+	schemas.cache.size = 1000
+	schemas.enable = true
+
+2020-02-16 21:28:28.254  INFO 76993 --- [main] o.a.k.connect.json.JsonConverterConfig   : JsonConverterConfig values: 
+	converter.type = value
+	schemas.cache.size = 1000
+	schemas.enable = false
+
+2020-02-16 21:28:28.271  INFO 76993 --- [main] i.d.e.EmbeddedEngine$EmbeddedConfig      : EmbeddedConfig values: 
+	access.control.allow.methods = 
+	access.control.allow.origin = 
+	bootstrap.servers = [localhost:9092]
+	config.providers = []
+	header.converter = class org.apache.kafka.connect.storage.SimpleHeaderConverter
+	internal.key.converter = class org.apache.kafka.connect.json.JsonConverter
+	internal.value.converter = class org.apache.kafka.connect.json.JsonConverter
+	key.converter = class org.apache.kafka.connect.json.JsonConverter
+	listeners = null
+	metric.reporters = []
+	metrics.num.samples = 2
+	metrics.recording.level = INFO
+	metrics.sample.window.ms = 30000
+	offset.flush.interval.ms = 60000
+	offset.flush.timeout.ms = 5000
+	offset.storage.file.filename = /Users/rbg831/Documents/Sohan/Projects/POC/embedded-debezium/student-cdc-relay/student-offset.dat
+	offset.storage.partitions = null
+	offset.storage.replication.factor = null
+	offset.storage.topic = 
+	plugin.path = null
+	rest.advertised.host.name = null
+	rest.advertised.listener = null
+	rest.advertised.port = null
+	rest.extension.classes = []
+	rest.host.name = null
+	rest.port = 8083
+	ssl.client.auth = none
+	task.shutdown.graceful.timeout.ms = 5000
+	value.converter = class org.apache.kafka.connect.json.JsonConverter
+
+2020-02-16 21:28:28.272  INFO 76993 --- [main] o.a.kafka.connect.runtime.WorkerConfig   : Worker configuration property 'internal.key.converter' is deprecated and may be removed in an upcoming release. The specified value matches the default, so this property can be safely removed from the worker configuration.
+2020-02-16 21:28:28.272  INFO 76993 --- [main] o.a.kafka.connect.runtime.WorkerConfig   : Worker configuration property 'internal.value.converter' is deprecated and may be removed in an upcoming release. The specified value matches the default, so this property can be safely removed from the worker configuration.
+2020-02-16 21:28:28.278  INFO 76993 --- [pool-3-thread-1] o.a.k.c.storage.FileOffsetBackingStore   : Starting FileOffsetBackingStore with file /Users/rbg831/Documents/Sohan/Projects/POC/embedded-debezium/student-cdc-relay/student-offset.dat
+2020-02-16 21:28:28.379  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      : Starting PostgresConnectorTask with configuration:
+2020-02-16 21:28:28.381  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    connector.class = io.debezium.connector.postgresql.PostgresConnector
+2020-02-16 21:28:28.382  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    offset.flush.interval.ms = 60000
+2020-02-16 21:28:28.382  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    database.user = user
+2020-02-16 21:28:28.382  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    database.dbname = studentdb
+2020-02-16 21:28:28.382  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    offset.storage.file.filename = /Users/rbg831/Documents/Sohan/Projects/POC/embedded-debezium/student-cdc-relay/student-offset.dat
+2020-02-16 21:28:28.382  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    offset.storage = org.apache.kafka.connect.storage.FileOffsetBackingStore
+2020-02-16 21:28:28.382  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    database.hostname = localhost
+2020-02-16 21:28:28.383  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    database.password = ********
+2020-02-16 21:28:28.383  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    name = student-postgres-connector
+2020-02-16 21:28:28.383  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    database.server.name = localhost-studentdb
+2020-02-16 21:28:28.383  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    database.port = 5432
+2020-02-16 21:28:28.383  INFO 76993 --- [pool-3-thread-1] i.d.connector.common.BaseSourceTask      :    table.whitelist = public.student
+2020-02-16 21:28:28.610  INFO 76993 --- [pool-3-thread-1] o.a.k.c.storage.FileOffsetBackingStore   : Stopped FileOffsetBackingStore
+2020-02-16 21:28:28.620 ERROR 76993 --- [pool-3-thread-1] io.debezium.embedded.EmbeddedEngine      : Unable to initialize and start connector's task class 'io.debezium.connector.postgresql.PostgresConnectorTask' with config: {name=student-postgres-connector, table.whitelist=public.student, connector.class=io.debezium.connector.postgresql.PostgresConnector, database.port=5432, offset.storage=org.apache.kafka.connect.storage.FileOffsetBackingStore, database.user=user, database.hostname=localhost, offset.storage.file.filename=/Users/rbg831/Documents/Sohan/Projects/POC/embedded-debezium/student-cdc-relay/student-offset.dat, database.password=********, offset.flush.interval.ms=60000, database.server.name=localhost-studentdb, database.dbname=studentdb}
+
+org.apache.kafka.connect.errors.ConnectException: Could not create PG connection
+	at io.debezium.connector.postgresql.connection.PostgresConnection.<init>(PostgresConnection.java:93) ~[debezium-connector-postgres-0.10.0.Final.jar:0.10.0.Final]
+	at io.debezium.connector.postgresql.PostgresConnectorTask.start(PostgresConnectorTask.java:80) ~[debezium-connector-postgres-0.10.0.Final.jar:0.10.0.Final]
+	at io.debezium.connector.common.BaseSourceTask.start(BaseSourceTask.java:49) ~[debezium-core-0.10.0.Final.jar:0.10.0.Final]
+	at io.debezium.embedded.EmbeddedEngine.run(EmbeddedEngine.java:793) ~[debezium-embedded-0.10.0.Final.jar:0.10.0.Final]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) ~[na:1.8.0_181]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) ~[na:1.8.0_181]
+	at java.lang.Thread.run(Thread.java:748) ~[na:1.8.0_181]
+Caused by: org.postgresql.util.PSQLException: Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:280) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:49) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:195) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.Driver.makeConnection(Driver.java:454) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.Driver.connect(Driver.java:256) ~[postgresql-42.2.5.jar:42.2.5]
+	at io.debezium.jdbc.JdbcConnection.lambda$patternBasedFactory$1(JdbcConnection.java:179) ~[debezium-core-0.10.0.Final.jar:0.10.0.Final]
+	at io.debezium.jdbc.JdbcConnection.connection(JdbcConnection.java:756) ~[debezium-core-0.10.0.Final.jar:0.10.0.Final]
+	at io.debezium.jdbc.JdbcConnection.connection(JdbcConnection.java:751) ~[debezium-core-0.10.0.Final.jar:0.10.0.Final]
+	at io.debezium.connector.postgresql.connection.PostgresConnection.<init>(PostgresConnection.java:88) ~[debezium-connector-postgres-0.10.0.Final.jar:0.10.0.Final]
+	... 6 common frames omitted
+Caused by: java.net.ConnectException: Connection refused (Connection refused)
+	at java.net.PlainSocketImpl.socketConnect(Native Method) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206) ~[na:1.8.0_181]
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188) ~[na:1.8.0_181]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392) ~[na:1.8.0_181]
+	at java.net.Socket.connect(Socket.java:589) ~[na:1.8.0_181]
+	at org.postgresql.core.PGStream.<init>(PGStream.java:70) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:91) ~[postgresql-42.2.5.jar:42.2.5]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:192) ~[postgresql-42.2.5.jar:42.2.5]
+	... 14 common frames omitted
+
+2020-02-16 21:28:28.761  INFO 76993 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-16 21:28:29.143  INFO 76993 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2020-02-16 21:28:29.260  INFO 76993 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-02-16 21:28:29.269  INFO 76993 --- [main] c.s.student.StudentCDCRelayApplication   : Started StudentCDCRelayApplication in 7.635 seconds (JVM running for 9.371)
+2020-02-16 21:31:03.687  INFO 76993 --- [RMI TCP Connection(11)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2020-02-16 21:31:03.710  INFO 76993 --- [RMI TCP Connection(11)-127.0.0.1] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

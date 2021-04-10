@@ -11,7 +11,7 @@ spec:
       version: v1
   trafficPolicy:
     tls:
-      mode: DISABLE   
+      mode: ISTIO_MUTUAL   
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
@@ -26,7 +26,7 @@ spec:
       version: v1
   trafficPolicy:
     tls:
-      mode: DISABLE    
+      mode: ISTIO_MUTUAL    
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
@@ -41,7 +41,7 @@ spec:
       version: v1
   trafficPolicy:
     tls:
-      mode: DISABLE    
+      mode: ISTIO_MUTUAL    
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
@@ -56,7 +56,7 @@ spec:
       version: v1
   trafficPolicy:
     tls:
-      mode: DISABLE
+      mode: ISTIO_MUTUAL
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
@@ -67,7 +67,7 @@ spec:
   host: compositeop
   trafficPolicy:
     tls:
-      mode: DISABLE  
+      mode: ISTIO_MUTUAL  
   trafficPolicy:
     loadBalancer:
       simple: RANDOM
@@ -95,4 +95,4 @@ spec:
       version: v1
   trafficPolicy:
     tls:
-      mode: DISABLE
+      mode: ISTIO_MUTUAL

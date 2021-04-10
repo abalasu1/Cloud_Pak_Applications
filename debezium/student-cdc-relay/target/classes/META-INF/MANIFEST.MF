@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Student CDC Relay
+Implementation-Version: 0.0.1
+Built-By: admin
+Implementation-Vendor-Id: com.sohan.student
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/student-cdc-relay
+Created-By: Maven Integration for Eclipse
+

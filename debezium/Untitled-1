@@ -1,0 +1,68 @@
+### Deploy kafka and test
+export STRIMZI_VERSION=0.2.0
+
+git clone -b $STRIMZI_VERSION https://github.com/strimzi/strimzi
+cd strimzi
+
+oc new-project debezium
+
+oc create -f examples/install/cluster-controller && oc create -f examples/templates/cluster-controller
+
+export DEBEZIUM_TAG=0.9
+oc new-app --name=mysql debezium/example-mysql:${DEBEZIUM_TAG}
+oc set env dc/mysql MYSQL_ROOT_PASSWORD=debezium MYSQL_USER=mysqluser MYSQL_PASSWORD=mysqlpw
+
+oc project debezium
+oc get pods
+oc get svc
+
+oc new-app strimzi-ephemeral -p ZOOKEEPER_NODE_COUNT=1 -p KAFKA_NODE_COUNT=1 -p KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 -p KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR=1
+
+oc get svc -l app=strimzi-ephemeral
+
+echo "Hello world" | oc exec -i my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+oc exec my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning --max-messages 1
+-----
+
+### Deploy Debezium
+oc new-app strimzi-connect-s2i -p KAFKA_CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR=1 -p KAFKA_CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR=1 -p KAFKA_CONNECT_STATUS_STORAGE_REPLICATION_FACTOR=1
+
+oc get bc
+oc get svc -l app=strimzi-connect-s2i
+
+export DEBEZIUM_VERSION=0.9.5.Final
+oc start-build my-connect-cluster-connect --from-archive http://central.maven.org/maven2/io/debezium/debezium-connector-mysql/0.9.5.Final/debezium-connector-mysql-0.9.5.Final-plugin.tar.gz --follow
+oc start-build my-connect-cluster-connect --from-archive http://central.maven.org/maven2/io/debezium/debezium-connector-mongodb/0.9.5.Final/debezium-connector-mongodb-0.9.5.Final-plugin.tar.gz --follow
+oc start-build my-connect-cluster-connect --from-archive http://central.maven.org/maven2/io/debezium/debezium-connector-postgres/0.9.5.Final/debezium-connector-postgres-0.9.5.Final-plugin.tar.gz --follow
+
+oc get pods -w -l app=strimzi-connect-s2i
+
+oc exec my-cluster-kafka-0 -- curl -s http://my-connect-cluster-connect:8083/connector-plugins
+
+{
+    "name":"inventory-connector",
+    "config": {
+        "connector.class":"io.debezium.connector.mysql.MySqlConnector",
+        "tasks.max":"1",
+        "database.hostname":"mysql",
+        "database.port":"3306",
+        "database.user":"debezium",
+        "database.password":"dbz",
+        "database.server.id":"184054",
+        "database.server.name":"dbserver1",
+        "database.whitelist":"inventory",
+        "database.history.kafka.bootstrap.servers":"my-cluster-kafka:9092",
+        "database.history.kafka.topic":"schema-changes.inventory"
+    }
+}
+
+oc logs $(oc get pods -o name -l app=strimzi-connect-s2i)
+oc exec my-cluster-kafka-0 -- /opt/kafka/bin/kafka-topics.sh --zookeeper my-cluster-zookeeper:2181 --list
+
+oc exec -i $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) -- bash -c 'mysql -t -u $MYSQL_USER -p$MYSQL_PASSWORD -e "SELECT * from customers" inventory'
+
+oc exec my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dbserver1.inventory.customers --from-beginning --max-messages 4
+
+oc exec -i $(oc get pods -o custom-columns=NAME:.metadata.name --no-headers -l app=mysql) -- bash -c 'mysql -t -u $MYSQL_USER -p$MYSQL_PASSWORD -e "INSERT INTO customers VALUES(default,\"John\",\"Doe\",\"john.doe@example.org\")" inventory'
+oc exec my-cluster-kafka-0 -- /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic dbserver1.inventory.customers --from-beginning --max-messages 5
