@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+		<spring-cloud.version>2025.1.3</spring-cloud.version>
 	    <docker.plugin.version>1.4.9</docker.plugin.version>
         <docker.image.prefix>arunimi</docker.image.prefix>		
 	</properties>
