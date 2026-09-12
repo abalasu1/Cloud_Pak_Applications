@@ -26,7 +26,7 @@
     "@ibm/plex": "*",
     "@types/chance": "^0.7.35",
     "@types/redis": "^2.8.3",
-    "adm-zip": "^0.4.13",
+    "adm-zip": "^0.6.0",
     "chance": "^1.0.12",
     "core-js": "^2.4.1",
     "cryptiles": "^4.1.3",
