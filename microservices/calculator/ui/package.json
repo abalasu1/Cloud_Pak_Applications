@@ -43,7 +43,7 @@
     "ssri": "^6.0.1",
     "then-redis": "^2.0.1",
     "webpack-dev-server": "^3.1.14",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.16.0"
   },
   "devDependencies": {
     "@angular/cli": "1.6.2",
