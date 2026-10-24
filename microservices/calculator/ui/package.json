@@ -42,7 +42,7 @@
     "sshpk": "^1.16.1",
     "ssri": "^6.0.1",
     "then-redis": "^2.0.1",
-    "webpack-dev-server": "^3.1.14",
+    "webpack-dev-server": "^5.0.0",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
